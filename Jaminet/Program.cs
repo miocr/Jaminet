@@ -31,10 +31,10 @@ namespace Jaminet
                 foreach (XElement inShopItem in feed.Descendants("SHOPITEM"))
                 {
                     code = inShopItem.Element("CODE").Value;
-#if DEBUG
+
                     if (code == "#END#")
                         break;
-#endif
+
                     ean = inShopItem.Element("EAN")?.Value;
                     pn = inShopItem.Element("PART_NUMBER")?.Value;
                     manufacturer = inShopItem.Element("MANUFACTURER")?.Value;
