@@ -150,7 +150,7 @@ namespace Jaminet
 
         public void ReadImportConfiguration()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Reading import configurations ...");
             Console.ResetColor();
             foreach (FeedImportSetting importSetting in SupplierSettings.FeedImportSettings)
