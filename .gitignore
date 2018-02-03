@@ -4,9 +4,13 @@
 #Temp
 *.txt
 tsb*.xml
+*.vbs
+.credentials/
+
 
 #VS
 .vs
+*.sln
 
 
 # build

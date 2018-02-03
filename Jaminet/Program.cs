@@ -14,19 +14,22 @@ namespace Jaminet
         {
 
            TSBohemia tsb = new TSBohemia();
-            tsb.ReadImportConfiguration();
+            //tsb.ReadImportConfiguration();
 
             //tsb.GetAndSaveFeed();
 
-            //tsb.LoadFeed();
+            tsb.LoadFeed();
 
-            //XElement extParameters = tsb.GetHeurekaProductsParameters();
-            //tsb.SaveHeurekaProductsParameters(extParameters);
+            XElement extParameters = tsb.GetHeurekaProductsParameters();
+            tsb.SaveHeurekaProductsParameters(extParameters);
 
-            //XElement extParameters = tsb.LoadExternalParameters();
-            //tsb.MergeFeedWithExtParameters(extParameters);
+            extParameters = tsb.LoadExternalParameters();
+            tsb.MergeFeedWithExtParameters(extParameters);
 
-            //tsb.SaveFeed();
+            //tsb.SaveFeed(false);
+
+            Console.WriteLine("Press any key...");
+            Console.Read();
         }
     }
 }

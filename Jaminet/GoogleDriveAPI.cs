@@ -34,6 +34,7 @@ namespace Jaminet
 
             using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write))
             {
+                Console.WriteLine("Downloading GoogleDrive fileId '{0}' to '{1}'", fileId, fileName);
                 FilesResource.ExportRequest request = service.Files.Export(fileId, mimeType);
                 request.Download(fs);
             }

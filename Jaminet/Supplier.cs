@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Net.Http;
 
-
 namespace Jaminet
 {
     public class SupplierSettings
@@ -32,17 +31,18 @@ namespace Jaminet
 
     public class Supplier
     {
-        private const string dataFDolder = ".\\Data";
+        private const string dataFolder = @"./Data";
 
         public const string categoryWLfileName = "categories-WL"; 
         public const string categoryBLfileName = "categories-BL";
         public const string productWLfileName = "products-WL";
         public const string productBLfileName = "products-BL";
+        public const string importConfigFileName = "import-config";
 
-        private const string feedFileName = "-feed.xml";
-        private const string feedMergedFileName = "-feed-merged.xml";
+        private const string feedFileName = "feed";
+        private const string feedMergedFileName = "feed-merged";
 
-        private const string extParametersFileName = "-ext-products-parameters.xml";
+        private const string extParametersFileName = "ext-products-parameters";
 
         protected SupplierSettings SupplierSettings { get; set; }
         
@@ -75,7 +75,8 @@ namespace Jaminet
             Feed = null;
             try
             {
-                using (FileStream fs = new FileStream(SupplierSettings.SupplierCode + feedFileName, FileMode.Open, FileAccess.Read))
+                Console.WriteLine("Loading feed from file '{0}'", FullFileName(feedFileName,"xml"));
+                using (FileStream fs = new FileStream(FullFileName(feedFileName,"xml"), FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
                 }
@@ -92,7 +93,7 @@ namespace Jaminet
             XElement extParameters = null;
             try
             {
-                using (FileStream fs = new FileStream(SupplierSettings.SupplierCode + extParametersFileName, FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(FullFileName(extParametersFileName,"xml"), FileMode.Open, FileAccess.Read))
                 {
                     extParameters = XElement.Load(fs);
                 }
@@ -111,7 +112,7 @@ namespace Jaminet
                 try
                 {
                     string fileName = isFeedMerged ? feedMergedFileName : feedFileName;
-                    using (FileStream fs = new FileStream(SupplierSettings.SupplierCode + fileName,
+                    using (FileStream fs = new FileStream(FullFileName(fileName,"xml"),
                         FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         Feed.Save(fs);
@@ -135,7 +136,7 @@ namespace Jaminet
 
             try
             {
-                using (FileStream fs = new FileStream(SupplierSettings.SupplierCode + extParametersFileName,
+                using (FileStream fs = new FileStream(FullFileName(extParametersFileName,"xml"),
                     FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     outDoc.Save(fs);
@@ -149,6 +150,9 @@ namespace Jaminet
 
         public void ReadImportConfiguration()
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Reading import configurations ...");
+            Console.ResetColor();
             foreach (FeedImportSetting importSetting in SupplierSettings.FeedImportSettings)
             {
                 ReadImportConfigurationFromGD(importSetting);
@@ -161,9 +165,8 @@ namespace Jaminet
             List<string> list = new List<string>();
 
             GoogleDriveAPI gd = new GoogleDriveAPI();
-            gd.DownloadFile(setting.GoogleDriveFileId,FullFileName(setting.Name,"txt"),setting.MimeType);
 
-            Console.WriteLine("Reading import list configuration {0}", FullFileName(setting.Name,"txt"));
+            gd.DownloadFile(setting.GoogleDriveFileId,FullFileName(setting.Name,"txt"),setting.MimeType);
 
             try
             {
@@ -273,7 +276,12 @@ namespace Jaminet
 
         private string FullFileName(string fileName, string extension)
         {
-            return String.Concat(SupplierSettings.SupplierCode, "-", fileName,".", extension);
+            if (!Directory.Exists(dataFolder))
+                Directory.CreateDirectory(dataFolder);
+
+            string fullPathFileName = Path.Combine(dataFolder,String.Concat(SupplierSettings.SupplierCode,"-", fileName,".", extension));
+            return fullPathFileName;
+            //return String.Concat(SupplierSettings.SupplierCode, "-", fileName,".", extension);
         }
     }
 }

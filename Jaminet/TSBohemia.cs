@@ -11,7 +11,6 @@ namespace Jaminet
 {
     public class TSBohemia : Supplier
     {
-
         public TSBohemia() : base()
         {
             SupplierSettings supplierSettings = new SupplierSettings()
@@ -24,20 +23,23 @@ namespace Jaminet
 
             supplierSettings.FeedImportSettings.Add(new FeedImportSetting
             {
+                //https://drive.google.com/open?id=1rkJ6MI99MMfCMPn-Z19zbqNmhS2fcTxJRwGJANPE7r0
                 Name = categoryBLfileName, //"category-bl",
                 GoogleDriveFileId = "1rkJ6MI99MMfCMPn-Z19zbqNmhS2fcTxJRwGJANPE7r0",
                 MimeType = "text/plain"
             });
 
             supplierSettings.FeedImportSettings.Add(new FeedImportSetting
-            {
+            {   
+                //https://drive.google.com/open?id=1pfYxfdaLzrlEhmeHxmpHqqLDU4Me7jx2aQ-EwtxD8-o
                 Name = categoryWLfileName,// "category-wl",
-                GoogleDriveFileId = "10eFpeOSpsFN6Dpr8h6jDW1b_nWx31SYzGkGFZ3iKFnQ",
+                GoogleDriveFileId = "1pfYxfdaLzrlEhmeHxmpHqqLDU4Me7jx2aQ-EwtxD8-o",
                 MimeType = "text/plain"
             });
 
             supplierSettings.FeedImportSettings.Add(new FeedImportSetting
             {
+                //https://drive.google.com/open?id=1x6lJNYaZinT2n8RqTVVF_l4BVqRi5ZpFR6AibmJqUW8
                 Name = productBLfileName, //"product-bl",
                 GoogleDriveFileId = "1x6lJNYaZinT2n8RqTVVF_l4BVqRi5ZpFR6AibmJqUW8",
                 MimeType = "text/plain"
@@ -45,8 +47,17 @@ namespace Jaminet
 
             supplierSettings.FeedImportSettings.Add(new FeedImportSetting
             {
+                //https://drive.google.com/open?id=15ZISrCdQZkrl1coJ0L4oOXnEdeJNqjXmK3z-HEbnv2c
                 Name = productWLfileName, //"product-wl",
                 GoogleDriveFileId = "15ZISrCdQZkrl1coJ0L4oOXnEdeJNqjXmK3z-HEbnv2c",
+                MimeType = "text/plain"
+            });
+
+            supplierSettings.FeedImportSettings.Add(new FeedImportSetting
+            {
+                //https://drive.google.com/open?id=10eFpeOSpsFN6Dpr8h6jDW1b_nWx31SYzGkGFZ3iKFnQ
+                Name = importConfigFileName, //"config",
+                GoogleDriveFileId = "10eFpeOSpsFN6Dpr8h6jDW1b_nWx31SYzGkGFZ3iKFnQ",
                 MimeType = "text/plain"
             });
 

@@ -35,7 +35,6 @@ namespace Jaminet
         public List<SearchObject> SearchList { get; set; } 
         public Supplier Supplier { get; set; }
 
-
         public Heureka(Supplier supplier)
         {
             Supplier = supplier;
@@ -44,6 +43,8 @@ namespace Jaminet
 
         public XElement GetProductsParameters()
         {
+            Console.WriteLine("Searching Heureka.cz for products parameters...");
+
             DateTime startTime = DateTime.Now;
             int itemCounter = 0;
             XElement outShopItems = new XElement("SHOPITEMS");
@@ -89,7 +90,8 @@ namespace Jaminet
             }
 
             TimeSpan span = DateTime.Now - startTime;
-            Console.WriteLine("Finished! Processing time: {0}", span.ToString());
+            Console.WriteLine("Finished! Grabbed {0} products, total time: {1}", 
+                itemCounter,span.ToString());
 
             return outShopItems;
         }
