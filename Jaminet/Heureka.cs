@@ -18,15 +18,80 @@ namespace Jaminet
         private const string searchMark3 = "<table id=\"product-parameters\"";
         private const string searchMark4 = "</table>";
 
+
         private string htmlPage;
+        
 
-        string ItemCode { get; set; }
-        string ItemName { get; set; }
-        string PartNumber { get; set; }
-        string EAN { get; set; }
-
-        public Heureka()
+        public class SearchObject
         {
+            public string SupplierCode { get; set; }
+            public string Manufacturer { get; set; }
+            public string EAN { get; set; }
+            public string PN { get; set; }
+            public string ISBN { get; set; }
+            public string Text { get; set; }
+        }
+
+        public List<SearchObject> SearchList { get; set; } 
+        public Supplier Supplier { get; set; }
+
+
+        public Heureka(Supplier supplier)
+        {
+            Supplier = supplier;
+            SearchList = new List<SearchObject>();
+        }
+
+        public XElement GetProductsParameters()
+        {
+            DateTime startTime = DateTime.Now;
+            int itemCounter = 0;
+            XElement outShopItems = new XElement("SHOPITEMS");
+            XElement productParameters;
+
+            foreach (SearchObject search in SearchList)
+            {
+                productParameters = null;
+                try
+                {
+                    Console.Write("{0} > Processing item code: {1}",
+                        (itemCounter++).ToString("000000"), search.SupplierCode.PadRight(10));
+
+                    if (search.EAN != null)
+                        productParameters = GetProductParameters(search.EAN, search.Manufacturer);
+
+                    if (productParameters == null && search.PN != null)
+                        productParameters = GetProductParameters(search.PN, search.Manufacturer);
+
+                    if (productParameters != null)
+                    {
+                        XElement outShopItem = new XElement("SHOPITEM");
+                        outShopItem.Add(new XAttribute("CODE", search.SupplierCode));
+                        outShopItem.Add(productParameters);
+
+                        outShopItems.Add(outShopItem);
+
+                        int paramsCount = productParameters.Descendants("INFORMATION_PARAMETER").Count();
+
+                        Console.WriteLine("... found {0} parameters", paramsCount);
+                    }
+                    else
+                    {
+                        Console.WriteLine("... not found");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Exception with SHOPITEM code:{0}, Exception:{1}",
+                        search.SupplierCode, ex.Message);
+                }
+            }
+
+            TimeSpan span = DateTime.Now - startTime;
+            Console.WriteLine("Finished! Processing time: {0}", span.ToString());
+
+            return outShopItems;
         }
 
         public XElement GetProductParameters(string searchText, string producer)
