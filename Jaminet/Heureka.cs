@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -18,10 +19,9 @@ namespace Jaminet
         private const string searchMark3 = "<table id=\"product-parameters\"";
         private const string searchMark4 = "</table>";
 
-
+        private static readonly Regex html2xmlValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
         private string htmlPage;
         
-
         public class SearchObject
         {
             public string SupplierCode { get; set; }
@@ -43,7 +43,7 @@ namespace Jaminet
 
         public XElement GetProductsParameters()
         {
-            Console.WriteLine("Searching Heureka.cz for products parameters...");
+            Console.WriteLine("Start searching Heureka.cz for products parameters...");
 
             DateTime startTime = DateTime.Now;
             int itemCounter = 0;
@@ -188,6 +188,7 @@ namespace Jaminet
 
         private XElement ParseToXml(string htmlProductSpecs)
         {
+            htmlProductSpecs = html2xmlValidateRegex.Replace(htmlProductSpecs,"&amp;");
             XDocument srcXml = XDocument.Parse(htmlProductSpecs);
             IEnumerable<XElement> trs = srcXml.XPathSelectElements("table/tbody/tr");
 

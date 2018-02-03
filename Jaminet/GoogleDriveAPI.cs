@@ -21,7 +21,7 @@ namespace Jaminet
         // at ~/.credentials/drive-dotnet-quickstart.json
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
         static string ApplicationName = "Drive API .NET Quickstart";
-        private DriveService service; 
+        private DriveService service;
 
 
         public GoogleDriveAPI()
@@ -45,21 +45,28 @@ namespace Jaminet
             UserCredential credential = null;
             DriveService service = null;
 
-            using (var stream =
-                      new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+            try
             {
-                string credPath = "./";
-                credPath = Path.Combine(credPath, ".credentials/google-drive-oauth.json");
+                using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
+                {
+                    string credPath = "./";
+                    credPath = Path.Combine(credPath, ".credentials/google-drive-oauth.json");
 
 
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
 
-                //Console.WriteLine("Credential file saved to: " + credPath);
+                    //Console.WriteLine("Credential file saved to: " + credPath);
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Create GoogleDisk service Exception:{0}", exc.Message);
+                Environment.Exit(-1);
             }
 
             if (credential != null)

@@ -13,20 +13,21 @@ namespace Jaminet
         static void Main(string[] args)
         {
 
-           TSBohemia tsb = new TSBohemia();
+            TSBohemia tsb = new TSBohemia();
+
             //tsb.ReadImportConfiguration();
 
-            //tsb.GetAndSaveFeed();
+            tsb.GetAndSaveFeed();
 
             tsb.LoadFeed();
-
+            
             XElement extParameters = tsb.GetHeurekaProductsParameters();
             tsb.SaveHeurekaProductsParameters(extParameters);
 
             extParameters = tsb.LoadExternalParameters();
             tsb.MergeFeedWithExtParameters(extParameters);
 
-            //tsb.SaveFeed(false);
+            tsb.SaveFeed(true);
 
             Console.WriteLine("Press any key...");
             Console.Read();
