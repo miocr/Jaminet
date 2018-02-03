@@ -19,7 +19,7 @@ namespace Jaminet
         private const string searchMark3 = "<table id=\"product-parameters\"";
         private const string searchMark4 = "</table>";
 
-        private static readonly Regex html2xmlValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
+        private static readonly Regex htmlAmpEntityRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
         private string htmlPage;
         
         public class SearchObject
@@ -188,7 +188,7 @@ namespace Jaminet
 
         private XElement ParseToXml(string htmlProductSpecs)
         {
-            htmlProductSpecs = html2xmlValidateRegex.Replace(htmlProductSpecs,"&amp;");
+            htmlProductSpecs = htmlAmpEntityRegex.Replace(htmlProductSpecs,"&amp;");
             XDocument srcXml = XDocument.Parse(htmlProductSpecs);
             IEnumerable<XElement> trs = srcXml.XPathSelectElements("table/tbody/tr");
 
