@@ -19,9 +19,9 @@ namespace Jaminet
         private const string searchMark3 = "<table id=\"product-parameters\"";
         private const string searchMark4 = "</table>";
 
-        private static readonly Regex htmlAmpEntityRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
+        private static readonly Regex html2xmlValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
         private string htmlPage;
-        
+
         public class SearchObject
         {
             public string SupplierCode { get; set; }
@@ -32,7 +32,7 @@ namespace Jaminet
             public string Text { get; set; }
         }
 
-        public List<SearchObject> SearchList { get; set; } 
+        public List<SearchObject> SearchList { get; set; }
         public Supplier Supplier { get; set; }
 
         public Heureka(Supplier supplier)
@@ -90,8 +90,8 @@ namespace Jaminet
             }
 
             TimeSpan span = DateTime.Now - startTime;
-            Console.WriteLine("Finished! Grabbed {0} products, total time: {1}", 
-                itemCounter,span.ToString());
+            Console.WriteLine("Finished! Grabbed {0} products, total time: {1}",
+                itemCounter, span.ToString());
 
             return outShopItems;
         }
@@ -188,7 +188,7 @@ namespace Jaminet
 
         private XElement ParseToXml(string htmlProductSpecs)
         {
-            htmlProductSpecs = htmlAmpEntityRegex.Replace(htmlProductSpecs,"&amp;");
+            htmlProductSpecs = html2xmlValidateRegex.Replace(htmlProductSpecs, "&amp;");
             XDocument srcXml = XDocument.Parse(htmlProductSpecs);
             IEnumerable<XElement> trs = srcXml.XPathSelectElements("table/tbody/tr");
 
@@ -241,16 +241,15 @@ namespace Jaminet
                         {
                             if (valueTd.Descendants("span").Attributes("id").Any())
                             {
-                                XElement panParValue = valueTd.Descendants("span")
+                                XElement tdSpanParValue = valueTd.Descendants("span")
                                     .Where(span => span.Attribute("id")
                                     .Value.StartsWith("param-value")).Single();
-                                paramValue = panParValue.Value;
+                                paramValue = tdSpanParValue.Value;
 
-                                XElement spanParValue = valueTd.Descendants("span")
+                                XElement tdSpanParUnit = valueTd.Descendants("span")
                                     .Where(span => span.Attribute("id")
                                     .Value.StartsWith("param-unit")).Single();
-
-                                paramUnit = spanParValue.Value;
+                                paramUnit = tdSpanParUnit.Value;
                             }
                             else
                             {
@@ -286,7 +285,7 @@ namespace Jaminet
 
                         // Shoptet feed nepodruje unit, pridame ho do hodnoty
                         if (!String.IsNullOrEmpty(paramUnit))
-                            paramValue = String.Concat(paramName, " ", paramUnit);
+                            paramValue = String.Concat(paramValue, " ", paramUnit);
                         outItem.Add(new XElement("VALUE", paramValue));
 
                         // Shoptet feed nepodporuje popis parametru

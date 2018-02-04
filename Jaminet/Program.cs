@@ -15,9 +15,9 @@ namespace Jaminet
 
             TSBohemia tsb = new TSBohemia();
 
-            //tsb.ReadImportConfiguration();
+            tsb.ReadImportConfiguration();
 
-            tsb.GetAndSaveFeed();
+            //tsb.GetAndSaveFeed();
 
             tsb.LoadFeed();
             
@@ -27,7 +27,7 @@ namespace Jaminet
             extParameters = tsb.LoadExternalParameters();
             tsb.MergeFeedWithExtParameters(extParameters);
 
-            tsb.SaveFeed(true);
+            //tsb.SaveFeed(true);
 
             Console.WriteLine("Press any key...");
             Console.Read();
