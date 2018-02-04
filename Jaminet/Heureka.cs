@@ -33,38 +33,58 @@ namespace Jaminet
         }
 
         public List<SearchObject> SearchList { get; set; }
-        public Supplier Supplier { get; set; }
+        public Supplier CurrentSupplier { get; set; }
 
         public Heureka(Supplier supplier)
         {
-            Supplier = supplier;
+            CurrentSupplier = supplier;
             SearchList = new List<SearchObject>();
         }
 
-        public XElement GetProductsParameters()
+        public XElement GetProductsParameters(bool onlyNew)
         {
+            if (onlyNew)
+            {
+                using (FileStream fs = new FileStream(CurrentSupplier.FullFileName(CurrentSupplier..FeedFileName, "xml"), FileMode.Open, FileAccess.Read))
+                {
+                    Feed = XElement.Load(fs);
+                }
+
+            }
             Console.WriteLine("Start searching Heureka.cz for products parameters...");
 
             DateTime startTime = DateTime.Now;
             int itemCounter = 0;
             XElement outShopItems = new XElement("SHOPITEMS");
             XElement productParameters;
+            bool foundByEAN = false;
+            bool foundByPN = false;
+
 
             foreach (SearchObject search in SearchList)
             {
                 productParameters = null;
                 try
                 {
-                    Console.Write("{0} > Processing item code: {1}",
+                    foundByPN = false;
+                    foundByEAN = false;
+
+                    Console.Write("{0} searching for: {1} > ",
                         (itemCounter++).ToString("000000"), search.SupplierCode.PadRight(10));
 
                     if (search.EAN != null)
+                    {
                         productParameters = GetProductParameters(search.EAN, search.Manufacturer);
+                        foundByEAN = (productParameters != null);
+                    }
 
-                    if (productParameters == null && search.PN != null)
+                    if (!foundByEAN && search.PN != null)
+                    {
                         productParameters = GetProductParameters(search.PN, search.Manufacturer);
+                        foundByPN = (productParameters != null);
+                    }
 
-                    if (productParameters != null)
+                    if (foundByPN || foundByEAN)
                     {
                         XElement outShopItem = new XElement("SHOPITEM");
                         outShopItem.Add(new XAttribute("CODE", search.SupplierCode));
@@ -74,11 +94,17 @@ namespace Jaminet
 
                         int paramsCount = productParameters.Descendants("INFORMATION_PARAMETER").Count();
 
-                        Console.WriteLine("... found {0} parameters", paramsCount);
+                        Console.Write("found {0} parameters ", paramsCount);
+                        if (foundByEAN)
+                            Console.WriteLine("by EAN:{0}", search.EAN);
+                        else if (foundByPN)
+                            Console.WriteLine("by PN:{0}", search.PN);
+                        else
+                            Console.WriteLine();
                     }
                     else
                     {
-                        Console.WriteLine("... not found");
+                        Console.WriteLine("not found");
                     }
                 }
                 catch (Exception ex)

@@ -39,10 +39,10 @@ namespace Jaminet
         public const string productBLfileName = "products-BL";
         public const string importConfigFileName = "import-config";
 
-        private const string feedFileName = "feed";
-        private const string feedMergedFileName = "feed-merged";
+        public const string feedFileName = "feed";
+        public const string feedMergedFileName = "feed-merged";
 
-        private const string extParametersFileName = "ext-products-parameters";
+        public const string ExtParametersFileName = "ext-products-parameters";
 
         protected SupplierSettings SupplierSettings { get; set; }
         
@@ -93,7 +93,7 @@ namespace Jaminet
             XElement extParameters = null;
             try
             {
-                using (FileStream fs = new FileStream(FullFileName(extParametersFileName,"xml"), FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(FullFileName(ExtParametersFileName,"xml"), FileMode.Open, FileAccess.Read))
                 {
                     extParameters = XElement.Load(fs);
                 }
@@ -136,7 +136,7 @@ namespace Jaminet
 
             try
             {
-                using (FileStream fs = new FileStream(FullFileName(extParametersFileName,"xml"),
+                using (FileStream fs = new FileStream(FullFileName(ExtParametersFileName,"xml"),
                     FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     outDoc.Save(fs);
@@ -274,7 +274,7 @@ namespace Jaminet
 
         }
 
-        private string FullFileName(string fileName, string extension)
+        public string FullFileName(string fileName, string extension)
         {
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);

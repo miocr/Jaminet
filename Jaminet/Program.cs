@@ -17,15 +17,15 @@ namespace Jaminet
 
             tsb.ReadImportConfiguration();
 
-            //tsb.GetAndSaveFeed();
+            tsb.GetAndSaveFeed();
 
             tsb.LoadFeed();
             
             XElement extParameters = tsb.GetHeurekaProductsParameters();
             tsb.SaveHeurekaProductsParameters(extParameters);
 
-            extParameters = tsb.LoadExternalParameters();
-            tsb.MergeFeedWithExtParameters(extParameters);
+            //extParameters = tsb.LoadExternalParameters();
+            //tsb.MergeFeedWithExtParameters(extParameters);
 
             //tsb.SaveFeed(true);
 
