@@ -90,44 +90,6 @@ namespace Jaminet
             }
         }
 
-        public override XElement GetHeurekaProductsParameters(bool onlyNew)
-        {
-            XElement result = null;
-
-            if (Feed == null)
-                return result;
-
-            Heureka heureka = new Heureka(this);
-
-            XElement extParameters = LoadExternalParameters();
-            List<string> existsExtParametrs = new List<string>();
-            if (onlyNew && extParameters != null)
-            {
-
-                foreach (XElement extParamater in extParameters.Descendants("SHOPITEM"))
-                {
-                    existsExtParametrs.Add(extParamater.Attribute("CODE").Value);
-                }
-            }
-
-            foreach (XElement inShopItem in Feed.Descendants("SHOPITEM"))
-            {
-                if (inShopItem.Element("CODE")?.Value == "#END#")
-                    break;
-
-                Heureka.SearchObject searchObject = new Heureka.SearchObject();
-                searchObject.SupplierCode = inShopItem.Element("CODE")?.Value;
-                searchObject.EAN = inShopItem.Element("EAN")?.Value;
-                searchObject.PN = inShopItem.Element("PART_NUMBER")?.Value;
-                searchObject.Manufacturer = inShopItem.Element("MANUFACTURER")?.Value;
-
-                heureka.SearchList.Add(searchObject);
-            }
-
-            result = heureka.GetProductsParameters(true);
-
-            return result;
-        }
     }
 
 

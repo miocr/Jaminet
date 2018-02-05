@@ -41,16 +41,8 @@ namespace Jaminet
             SearchList = new List<SearchObject>();
         }
 
-        public XElement GetProductsParameters(bool onlyNew)
+        public XElement GetProductsParameters()
         {
-            if (onlyNew)
-            {
-                using (FileStream fs = new FileStream(CurrentSupplier.FullFileName(CurrentSupplier..FeedFileName, "xml"), FileMode.Open, FileAccess.Read))
-                {
-                    Feed = XElement.Load(fs);
-                }
-
-            }
             Console.WriteLine("Start searching Heureka.cz for products parameters...");
 
             DateTime startTime = DateTime.Now;
@@ -59,7 +51,6 @@ namespace Jaminet
             XElement productParameters;
             bool foundByEAN = false;
             bool foundByPN = false;
-
 
             foreach (SearchObject search in SearchList)
             {

@@ -15,16 +15,16 @@ namespace Jaminet
 
             TSBohemia tsb = new TSBohemia();
 
-            tsb.ReadImportConfiguration();
+            //tsb.ReadImportConfiguration();
 
-            tsb.GetAndSaveFeed();
+            //tsb.GetAndSaveFeed();
 
             tsb.LoadFeed();
             
-            XElement extParameters = tsb.GetHeurekaProductsParameters();
+            XElement extParameters = tsb.GetHeurekaProductsParameters(true);
             tsb.SaveHeurekaProductsParameters(extParameters);
 
-            //extParameters = tsb.LoadExternalParameters();
+            //extParameters = tsb.LoadExternalParameteFilers();
             //tsb.MergeFeedWithExtParameters(extParameters);
 
             //tsb.SaveFeed(true);

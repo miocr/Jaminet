@@ -10,7 +10,7 @@ namespace Jaminet
     {
         private int timeOut;
 
-        public Downloader(int timeOutSeconds = 5)
+        public Downloader(int timeOutSeconds = 15)
         {
             timeOut = timeOutSeconds;
         }
