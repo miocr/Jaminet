@@ -6,32 +6,34 @@ using System.Threading.Tasks;
 
 namespace Jaminet
 {
-    public class Downloader
+    public static class Downloader
     {
-        private int timeOut;
+        //public static int TimeOut { get; set; }
 
-        public Downloader(int timeOutSeconds = 15)
-        {
-            timeOut = timeOutSeconds;
-        }
+        //public Downloader(int timeOutSeconds = 15)
+        //{
+        //    TimeOut = timeOutSeconds;
+        //}
 
-        public string GetPage(string url)
+        public static string GetPage(string url)
         {
             Task<string> task = GetPageAsync(url);
             return task.Result;
         }
 
-        public async Task<string> GetPageAsync(string url)
+        private static async Task<string> GetPageAsync(string url)
         {
-            HttpClient httpClient = new HttpClient();
-            httpClient.Timeout = new TimeSpan(0, 0, timeOut);
-
-            HttpResponseMessage response = await httpClient.GetAsync(url);
-
-            return await response.Content.ReadAsStringAsync();
+            using (HttpClient httpClient = new HttpClient())
+            {
+                httpClient.Timeout = new TimeSpan(0, 0, 15);
+                using (HttpResponseMessage response = await httpClient.GetAsync(url))
+                {
+                    return await response.Content.ReadAsStringAsync();
+                }
+            }
         }
 
-        public long Download(string fileName, string url, string login = null, string password = null)
+        public static long Download(string fileName, string url, string login = null, string password = null)
         {
             NetworkCredential credential = null;
 
@@ -44,7 +46,7 @@ namespace Jaminet
             return task.Result;
         }
 
-        public async Task<long> DownloadAsync(string url, string fileName, NetworkCredential credential)
+        private static async Task<long> DownloadAsync(string url, string fileName, NetworkCredential credential)
         {
             byte[] buffer = new byte[8192];
 
@@ -52,49 +54,52 @@ namespace Jaminet
             long totalRead = 0;
             long totalReads = 0;
 
-            HttpClientHandler httpClientHandler = new HttpClientHandler()
+            using (HttpClientHandler httpClientHandler = new HttpClientHandler())
             {
-                Credentials = credential,
-                UseDefaultCredentials = false,
-                PreAuthenticate = true,
-                UseProxy = false
-            };
+                httpClientHandler.Credentials = credential;
+                httpClientHandler.UseDefaultCredentials = false;
+                httpClientHandler.PreAuthenticate = true;
+                httpClientHandler.UseProxy = false;
 
-            HttpClient httpClient = new HttpClient(httpClientHandler);
-            httpClient.Timeout = TimeSpan.FromHours(1);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
-
-            HttpResponseMessage response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-            response.EnsureSuccessStatusCode();
-
-            using (Stream cs = await response.Content.ReadAsStreamAsync())
-            {
-                using (var fs = new FileStream(fileName, FileMode.Create))
+                using (HttpClient httpClient = new HttpClient(httpClientHandler))
                 {
-                    Console.Write("{0} MB... ", 0);
-                    do
+                    httpClient.Timeout = TimeSpan.FromHours(1);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
+
+                    HttpResponseMessage response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                    response.EnsureSuccessStatusCode();
+
+                    using (Stream cs = await response.Content.ReadAsStreamAsync())
                     {
-                        int read = await cs.ReadAsync(buffer, 0, buffer.Length);
-                        if (read == 0)
+                        using (var fs = new FileStream(fileName, FileMode.Create))
                         {
-                            endOfStream = true;
-                        }
-                        else
-                        {
-                            await fs.WriteAsync(buffer, 0, read);
-
-                            totalRead += read;
-                            totalReads++;
-
-                            if (totalReads % 1000 == 0)
+                            Console.Write("{0} MB... ", 0);
+                            do
                             {
-                                Console.Write("{0} MB... ", totalRead/(1024*1024));
-                            }
-                            
+                                int read = await cs.ReadAsync(buffer, 0, buffer.Length);
+                                if (read == 0)
+                                {
+                                    endOfStream = true;
+                                }
+                                else
+                                {
+                                    await fs.WriteAsync(buffer, 0, read);
+
+                                    totalRead += read;
+                                    totalReads++;
+
+                                    if (totalReads % 1000 == 0)
+                                    {
+                                        Console.Write("{0} MB... ", totalRead / (1024 * 1024));
+                                    }
+
+                                }
+                            } while (!endOfStream);
                         }
-                    } while (!endOfStream);
+                    }
                 }
             }
             Console.WriteLine("\nDownload finished ({0} Bytes)", totalRead);

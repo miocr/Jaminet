@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 namespace Jaminet
 {
-
     public class Heureka
     {
         private const string searchURL = "https://www.heureka.cz/?h[fraze]=";
@@ -19,7 +18,9 @@ namespace Jaminet
         private const string searchMark3 = "<table id=\"product-parameters\"";
         private const string searchMark4 = "</table>";
 
-        private static readonly Regex html2xmlValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
+        private static readonly Regex htmlAMPValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
+        private static readonly Regex htmlGTValidateRegex = new Regex(@"(?<=>.*)>(?=.*<\/)", RegexOptions.Compiled);
+        private static readonly Regex htmlLTValidateRegex = new Regex(@"(?<=>.*)<(?=.*<\/)", RegexOptions.Compiled);
         private string htmlPage;
 
         public class SearchObject
@@ -47,7 +48,7 @@ namespace Jaminet
 
             DateTime startTime = DateTime.Now;
             int itemCounter = 0;
-            XElement outShopItems = new XElement("SHOPITEMS");
+            XElement outShopItems = new XElement("SHOP");
             XElement productParameters;
             bool foundByEAN = false;
             bool foundByPN = false;
@@ -104,6 +105,13 @@ namespace Jaminet
                     Console.WriteLine("Exception with SHOPITEM code:{0}, Exception:{1}",
                         search.SupplierCode, ex.Message);
                 }
+
+                if (itemCounter % 500 == 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Clear and GC.Collect...");
+                    GC.Collect();
+                }
             }
 
             TimeSpan span = DateTime.Now - startTime;
@@ -127,9 +135,8 @@ namespace Jaminet
         private string GetParameters(string searchText, string producer)
         {
             string result = null;
-            Downloader downloader = new Downloader();
             string search = searchText.Replace(" ", "+");
-            htmlPage = downloader.GetPage(searchURL + search);
+            htmlPage = Downloader.GetPage(searchURL + search);
             if (!String.IsNullOrEmpty(htmlPage))
             {
                 int searchPos1 = htmlPage.IndexOf(searchMark1, 0, StringComparison.OrdinalIgnoreCase);
@@ -138,7 +145,7 @@ namespace Jaminet
                     string produktSpecificationUrl = RelevantPairedProductProductUrl(htmlPage, producer);
                     if (produktSpecificationUrl.Length > 0)
                     {
-                        htmlPage = downloader.GetPage(produktSpecificationUrl);
+                        htmlPage = Downloader.GetPage(produktSpecificationUrl);
                         searchPos1 = htmlPage.IndexOf(searchMark3, 0, StringComparison.OrdinalIgnoreCase);
                         if (searchPos1 > 0)
                         {
@@ -205,7 +212,9 @@ namespace Jaminet
 
         private XElement ParseToXml(string htmlProductSpecs)
         {
-            htmlProductSpecs = html2xmlValidateRegex.Replace(htmlProductSpecs, "&amp;");
+            htmlProductSpecs = htmlAMPValidateRegex.Replace(htmlProductSpecs, "&amp;");
+            htmlProductSpecs = htmlGTValidateRegex.Replace(htmlProductSpecs, "&gt;");
+            htmlProductSpecs = htmlLTValidateRegex.Replace(htmlProductSpecs, "&lt;");
             XDocument srcXml = XDocument.Parse(htmlProductSpecs);
             IEnumerable<XElement> trs = srcXml.XPathSelectElements("table/tbody/tr");
 
