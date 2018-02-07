@@ -394,23 +394,27 @@ namespace Jaminet
                 }
             }
 
+            string supplierCode;
             foreach (XElement inShopItem in Feed.Descendants("SHOPITEM"))
             {
-                if (inShopItem.Element("CODE")?.Value == "#END#")
+                supplierCode = inShopItem.Element("CODE")?.Value;
+
+                // pro DEBUG
+                if (supplierCode == "#END#")
                     break;
 
-                Heureka.SearchObject searchObject = new Heureka.SearchObject();
-                searchObject.SupplierCode = inShopItem.Element("CODE")?.Value;
-
-                if (onlyNew && existsExtParametrsList.Contains(searchObject.SupplierCode))
+                if ((supplierCode == null) || (onlyNew && existsExtParametrsList.Contains(supplierCode)))
                     continue;
 
-
-                searchObject.EAN = inShopItem.Element("EAN")?.Value;
-                searchObject.PN = inShopItem.Element("PART_NUMBER")?.Value;
-                searchObject.Manufacturer = inShopItem.Element("MANUFACTURER")?.Value;
-
-                heureka.SearchList.Add(searchObject);
+                heureka.SearchList.Add(
+                    new Heureka.SearchObject
+                    {
+                        SupplierCode = supplierCode,
+                        EAN = inShopItem.Element("EAN")?.Value,
+                        PN = inShopItem.Element("PART_NUMBER")?.Value,
+                        Manufacturer = inShopItem.Element("MANUFACTURER")?.Value
+                    }
+                );
             }
 
             result = heureka.GetProductsParameters();
