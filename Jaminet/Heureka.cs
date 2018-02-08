@@ -22,6 +22,7 @@ namespace Jaminet
         private static readonly Regex htmlGTValidateRegex = new Regex(@"(?<=>.*)>(?=.*<\/)", RegexOptions.Compiled);
         private static readonly Regex htmlLTValidateRegex = new Regex(@"(?<=>.*)<(?=.*<\/)", RegexOptions.Compiled);
         private string htmlPage;
+        private Downloader downloader;
 
         public class SearchObject
         {
@@ -40,8 +41,8 @@ namespace Jaminet
         {
             CurrentSupplier = supplier;
             SearchList = new List<SearchObject>();
+            downloader = new Downloader();
         }
-
 
         public XElement GetProductsParameters()
         {
@@ -278,17 +279,19 @@ namespace Jaminet
         private string GetParameters(string searchText, string producer)
         {
             string result = null;
+            string produktSpecificationUrl = null;
             string search = searchText.Replace(" ", "+");
-            htmlPage = Downloader.GetPage(searchURL + search);
-            if (!String.IsNullOrEmpty(htmlPage))
+
+            htmlPage = downloader.GetPage(searchURL + search);
+            if (htmlPage != null)
             {
                 int searchPos1 = htmlPage.IndexOf(searchMark1, 0, StringComparison.OrdinalIgnoreCase);
                 if (searchPos1 > 0)
                 {
-                    string produktSpecificationUrl = RelevantPairedProductProductUrl(htmlPage, producer);
-                    if (produktSpecificationUrl.Length > 0)
+                    produktSpecificationUrl = RelevantPairedProductProductUrl(htmlPage, producer);
+                    if (produktSpecificationUrl != null)
                     {
-                        htmlPage = Downloader.GetPage(produktSpecificationUrl);
+                        htmlPage = downloader.GetPage(produktSpecificationUrl);
                         searchPos1 = htmlPage.IndexOf(searchMark3, 0, StringComparison.OrdinalIgnoreCase);
                         if (searchPos1 > 0)
                         {
@@ -311,8 +314,7 @@ namespace Jaminet
             int offset = 1;
             int pairedCounter = 0;
             string hrProduktUrl = null;
-            string result = String.Empty;
-
+            string result = null;
 
             producer = producer.ToLower().Replace(" ", "-");
 
@@ -343,11 +345,6 @@ namespace Jaminet
             if (relevantProducerFound)
             {
                 result = hrProduktUrl + "specifikace/";
-                //if (pairedCounter > 1)
-                //{ 
-                //    // Nalezeno vice sparovanych produktu 
-                //    Console.WriteLine("Multiple results, using by producer match '{0}'", producer);
-                //}
             }
 
             return result;

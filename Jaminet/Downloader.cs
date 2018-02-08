@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -6,51 +6,59 @@ using System.Threading.Tasks;
 
 namespace Jaminet
 {
-    public static class Downloader
+    public class Downloader
     {
+        private HttpClient httpClient;
+        private HttpResponseMessage httpResponse;
+        private HttpClientHandler httpClientHandler;
 
-        private static HttpClient httpClient;
-
-        static Downloader()
+        public Downloader(string login = null, string password = null)
         {
-            httpClient = new HttpClient()
+            httpClientHandler = new HttpClientHandler()
             {
-                Timeout = new TimeSpan(0, 0, 10)
+                PreAuthenticate = true,
+                UseProxy = false,
+                UseDefaultCredentials = true
+            };
+
+            if (login != null && password != null)
+            {
+                httpClientHandler.Credentials = new NetworkCredential(login, password);
+                httpClientHandler.UseDefaultCredentials = false;
+            }
+
+
+            httpClient = new HttpClient(httpClientHandler)
+            {
+                Timeout = TimeSpan.FromSeconds(10)
             };
         }
 
-        public static string GetPage(string url)
+        ~Downloader()
+        {
+            httpClientHandler.Dispose();
+            httpClient.Dispose();
+        }
+
+        public string GetPage(string url)
         {
             Task<string> task = GetPageAsync(url);
             return task.Result;
         }
 
-        private static async Task<string> GetPageAsync(string url)
+        private async Task<string> GetPageAsync(string url)
         {
-            using (HttpResponseMessage response = await httpClient.GetAsync(url))
-            {
-                return await response.Content.ReadAsStringAsync();
-            }
+            httpResponse = await httpClient.GetAsync(url);
+            return await httpResponse.Content.ReadAsStringAsync();
         }
 
-        public static long Download(string fileName, string url, string login = null, string password = null)
+        public long DownloadFile(string url, string fileName)
         {
-            // pro Download prodlouzime Timeout na hodinu a pak vratime na puvodni hodnotu
-            TimeSpan defTimeOut = httpClient.Timeout;
-            httpClient.Timeout = new TimeSpan(1, 0, 0);
-            NetworkCredential credential = null;
-
-            if (login != null && password != null)
-            {
-                credential = new NetworkCredential(login, password);
-            }
-
-            Task<long> task = DownloadAsync(url, fileName, credential);
-            httpClient.Timeout = defTimeOut;
+            Task<long> task = DownloadAsync(url, fileName);
             return task.Result;
         }
 
-        private static async Task<long> DownloadAsync(string url, string fileName, NetworkCredential credential)
+        private async Task<long> DownloadAsync(string url, string fileName)
         {
             byte[] buffer = new byte[8192];
 
@@ -58,50 +66,39 @@ namespace Jaminet
             long totalRead = 0;
             long totalReads = 0;
 
-            using (HttpClientHandler httpClientHandler = new HttpClientHandler())
+            HttpResponseMessage response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            response.EnsureSuccessStatusCode();
+
+            using (Stream cs = await response.Content.ReadAsStreamAsync())
             {
-                httpClientHandler.Credentials = credential;
-                httpClientHandler.UseDefaultCredentials = false;
-                httpClientHandler.PreAuthenticate = true;
-                httpClientHandler.UseProxy = false;
-
-
-                httpClient.Timeout = TimeSpan.FromHours(1);
-
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
-
-                HttpResponseMessage response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                response.EnsureSuccessStatusCode();
-
-                using (Stream cs = await response.Content.ReadAsStreamAsync())
+                using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 {
-                    using (var fs = new FileStream(fileName, FileMode.Create))
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
+
+                    do
                     {
-                        Console.Write("{0} MB... ", 0);
-                        do
+if (totalReads % 1000 == 0)
+{
+Console.Write("{0} MB... ", totalRead / (1024 * 1024));
+}
+
+                        int read = await cs.ReadAsync(buffer, 0, buffer.Length);
+                        if (read == 0)
                         {
-                            int read = await cs.ReadAsync(buffer, 0, buffer.Length);
-                            if (read == 0)
-                            {
-                                endOfStream = true;
-                            }
-                            else
-                            {
-                                await fs.WriteAsync(buffer, 0, read);
+                            endOfStream = true;
+                        }
+                        else
+                        {
+                            await fs.WriteAsync(buffer, 0, read);
 
-                                totalRead += read;
-                                totalReads++;
+                            totalRead += read;
+                            totalReads++;
 
-                                if (totalReads % 1000 == 0)
-                                {
-                                    Console.Write("{0} MB... ", totalRead / (1024 * 1024));
-                                }
-
-                            }
-                        } while (!endOfStream);
-                    }
+                        }
+                    } while (!endOfStream);
                 }
+
             }
             Console.WriteLine("\nDownload finished ({0} Bytes)", totalRead);
             Console.ResetColor();

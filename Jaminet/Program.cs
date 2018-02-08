@@ -15,21 +15,20 @@ namespace Jaminet
 
             TSBohemia tsb = new TSBohemia();
 
-            //tsb.ReadImportConfiguration();
-
+            tsb.ReadImportConfiguration();
             //tsb.GetAndSaveFeed();
 
             tsb.LoadFeed();
 
             //tsb.FilterFeed();
 
-            XElement extParameters = tsb.GetHeurekaProductsParameters();
+            //XElement extParameters = tsb.GetHeurekaProductsParameters();
             //tsb.SaveHeurekaProductsParameters(extParameters);
 
-            //XElement extParameters = tsb.LoadHeurekaProductsParameters();
-            //tsb.MergeFeedWithExtParameters(extParameters);
+            XElement extParameters = tsb.LoadHeurekaProductsParameters();
+            tsb.MergeFeedWithExtParameters(extParameters);
 
-            //tsb.SaveFeed(true);
+            tsb.SaveFeed(true);
 
             Console.WriteLine("Press any key...");
             Console.Read();

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -64,11 +64,11 @@ namespace Jaminet
             SupplierSettings = supplierSetiings;
         }
 
-        public virtual void GetAndSaveFeed()
+
+        public void GetAndSaveFeed()
         {
-            //Downloader downloader = new Downloader(3600);
-            long content = Downloader.Download(FullFileName(feedFileName, "xml"), SupplierSettings.FeedUrl,
-                SupplierSettings.FeedUrlLogin, SupplierSettings.FeedUrlPassword);
+            Downloader downloader = new Downloader(SupplierSettings.FeedUrlLogin, SupplierSettings.FeedUrlPassword);
+            long content = downloader.DownloadFile(SupplierSettings.FeedUrl, FullFileName(feedFileName, "xml"));
         }
 
         public virtual XElement LoadFeed()
@@ -310,39 +310,26 @@ namespace Jaminet
                 enabled = true;
                 foreach (string categoryBL in CategoryBlackList)
                 {
-                    if (categoryBL.EndsWith("*"))
-                    {
                         if (itemCategory.Value.StartsWith(categoryBL))
                         {
                             enabled = false;
                             // prvni zakaz staci, dalsi neoverujeme
                             break;
                         }
-                    }
-                    else
-                    {
-                        if (itemCategory.Value == categoryBL)
-                        {
-                            enabled = false;
-                            // prvni zakaz staci, dalsi neoverujeme
-                            break;
-                        }
-                    }
                 }
 
-                // WhiteList overime jen pokud je polozka zakazana
-                // Pokud je povolena, je zbytecne ji znovu povolovat
+                // WhiteList overime jen pokud je polozka zakazana podle BL
+                // protoze povoleni podle WL ma vyssi prioritu nez BL. 
+                // Pokud neni zakazana podle BL, je zbytecne ji znovu povolovat
                 if (enabled == false)
                 {
                     foreach (string categoryWL in CategoryWhiteList)
                     {
-                        if (categoryWL.EndsWith("*"))
+                        if (itemCategory.Value.StartsWith(categoryWL))
                         {
-                            enabled = itemCategory.Value.StartsWith(categoryWL);
-                        }
-                        else
-                        {
-                            enabled = itemCategory.Value == categoryWL;
+                            enabled = true;
+                            // prvni povoleni staci, dalsi neoverujeme
+                            break;
                         }
                     }
                 }
@@ -443,7 +430,6 @@ namespace Jaminet
 
             string fullPathFileName = Path.Combine(dataFolder, String.Concat(SupplierSettings.SupplierCode, "-", fileName, ".", extension));
             return fullPathFileName;
-            //return String.Concat(SupplierSettings.SupplierCode, "-", fileName,".", extension);
         }
     }
 }
