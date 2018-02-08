@@ -71,17 +71,17 @@ namespace Jaminet
 
             using (Stream cs = await response.Content.ReadAsStreamAsync())
             {
+                Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+
                 using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
-
                     do
                     {
-if (totalReads % 1000 == 0)
-{
-Console.Write("{0} MB... ", totalRead / (1024 * 1024));
-}
+                        if (totalReads % 1000 == 0)
+                        {
+                            Console.Write("{0} MB... ", totalRead / (1024 * 1024));
+                        }
 
                         int read = await cs.ReadAsync(buffer, 0, buffer.Length);
                         if (read == 0)

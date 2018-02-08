@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "rules": [
+    {
+      "type": "item-disable",
+      "element": "",
+      "newValue": "",
+      "conditions": [
+        {
+          "element": "SHOP/SHOPITEM/STOCK/AMOUNT",
+          "operator": "<",
+          "value": "5",
+          "nextCondition": ""
+        }
+      ]
+    },
+    {
+      "type": "change-value",
+      "element": "SHOP/SHOPITEM/STOCK/AMOUNT",
+      "newValue": "300",
+      "conditions": [
+        {
+          "sourceElement": "SHOP/SHOPITEM/STOCK/AMOUNT",
+          "conditionOperator": "==",
+          "conditionValue": "50",
+          "nextCondition": "and"
+        },
+        {
+          "sourceElement": "SHOP/SHOPITEM/CATEGORIES/CATEGORY",
+          "conditionOperator": "contains",
+          "conditionValue": "Spotrebni material &gt; Papir",
+          "nextCondition": ""
+        }
+      ]
+    }
+  ]
+}

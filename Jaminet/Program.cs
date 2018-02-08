@@ -13,19 +13,26 @@ namespace Jaminet
         static void Main(string[] args)
         {
 
+            FeedConfiguration fc = new FeedConfiguration();
+
+            return;
+
             TSBohemia tsb = new TSBohemia();
 
             tsb.ReadImportConfiguration();
+
             //tsb.GetAndSaveFeed();
 
             tsb.LoadFeed();
 
-            //tsb.FilterFeed();
+            XElement extParameters = null;
 
-            //XElement extParameters = tsb.GetHeurekaProductsParameters();
-            //tsb.SaveHeurekaProductsParameters(extParameters);
+            extParameters = tsb.GetHeurekaProductsParameters();
+            tsb.SaveHeurekaProductsParameters(extParameters);
+            extParameters = tsb.LoadHeurekaProductsParameters();
 
-            XElement extParameters = tsb.LoadHeurekaProductsParameters();
+            tsb.FilterFeed();
+
             tsb.MergeFeedWithExtParameters(extParameters);
 
             tsb.SaveFeed(true);

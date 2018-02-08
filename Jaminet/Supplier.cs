@@ -210,6 +210,9 @@ namespace Jaminet
             }
         }
 
+        /// <summary>
+        /// Filters the feed.
+        /// </summary>
         public virtual void FilterFeed()
         {
             if (CategoryBlackList == null || CategoryWhiteList == null ||
@@ -235,6 +238,10 @@ namespace Jaminet
             }
         }
 
+        /// <summary>
+        /// Merges the feed with grabbed parameters from external source
+        /// </summary>
+        /// <param name="extParamaters">Ext paramaters.</param>
         public virtual void MergeFeedWithExtParameters(XElement extParamaters)
         {
             if (Feed == null || extParamaters == null)
@@ -310,13 +317,15 @@ namespace Jaminet
                 enabled = true;
                 foreach (string categoryBL in CategoryBlackList)
                 {
-                        if (itemCategory.Value.StartsWith(categoryBL))
-                        {
-                            enabled = false;
-                            // prvni zakaz staci, dalsi neoverujeme
-                            break;
-                        }
+                    if (itemCategory.Value.StartsWith(categoryBL,
+                        StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        enabled = false;
+                        // prvni zakaz staci, dalsi neoverujeme
+                        break;
+                    }
                 }
+
 
                 // WhiteList overime jen pokud je polozka zakazana podle BL
                 // protoze povoleni podle WL ma vyssi prioritu nez BL. 
@@ -325,7 +334,8 @@ namespace Jaminet
                 {
                     foreach (string categoryWL in CategoryWhiteList)
                     {
-                        if (itemCategory.Value.StartsWith(categoryWL))
+                        if (itemCategory.Value.StartsWith(categoryWL,
+                                StringComparison.CurrentCultureIgnoreCase))
                         {
                             enabled = true;
                             // prvni povoleni staci, dalsi neoverujeme

@@ -50,3 +50,4 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+Jaminet/.credentials/google-drive-oauth.json/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user

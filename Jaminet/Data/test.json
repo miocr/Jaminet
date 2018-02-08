@@ -1,0 +1,1 @@
+{"rules":[{"condistions":[{"conditionOperator":"==","conditionValue":"5","nextCondition":null,"sourceElement":"element"}],"element":"element","newValue":"100","type":null}],"version":"1.0"}
