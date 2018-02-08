@@ -19,8 +19,8 @@ namespace Jaminet
     [DataContract]
     public class ImportConfigurationRule
     {
-        [DataMember(Name = "type",Order = 1)]
-        public string Type { get; set; }
+        [DataMember(Name = "operation",Order = 1)]
+        public string Operation { get; set; }
         [DataMember(Name = "element",Order = 2)]
         public string Element { get; set; }
         [DataMember(Name = "newValue",Order = 3)]
@@ -32,13 +32,13 @@ namespace Jaminet
     [DataContract]
     public class ImportConfigurationRuleCondition
     {
-        [DataMember(Name = "element")]
+        [DataMember(Name = "element",Order = 1)]
         public string Element { get; set; }
-        [DataMember(Name = "operator")]
+        [DataMember(Name = "operator",Order = 2)]
         public string Operator { get; set; }
-        [DataMember(Name = "value")]
+        [DataMember(Name = "value",Order = 3)]
         public string Value { get; set; }
-        [DataMember(Name = "nextCondition")]
+        [DataMember(Name = "nextCondition",Order = 4)]
         public string NextCondition { get; set; }
 
     }
@@ -84,7 +84,6 @@ namespace Jaminet
                 Version = "1.0",
                 Rules = new List<ImportConfigurationRule>() { icr }
             };
-
 
             using (FileStream fsw = File.OpenWrite(@"Data/test.json"))
             {
