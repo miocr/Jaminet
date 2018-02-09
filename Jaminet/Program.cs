@@ -12,14 +12,13 @@ namespace Jaminet
     {
         static void Main(string[] args)
         {
-
-            FeedConfiguration fc = new FeedConfiguration();
-
-            return;
-
             TSBohemia tsb = new TSBohemia();
 
             tsb.ReadImportConfiguration();
+
+
+            FeedConfiguration fc = new FeedConfiguration();
+
 
             //tsb.GetAndSaveFeed();
 

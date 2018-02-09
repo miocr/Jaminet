@@ -32,6 +32,7 @@ namespace Jaminet
     public class Supplier
     {
         private const string dataFolder = @"./Data";
+        private GoogleDriveAPI gd;
 
         public const string categoryWLfileName = "categories-WL";
         public const string categoryBLfileName = "categories-BL";
@@ -159,21 +160,45 @@ namespace Jaminet
 
         public void ReadImportConfiguration()
         {
+            if (gd == null)
+                gd = new GoogleDriveAPI();
+
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Reading import configurations ...");
             Console.ResetColor();
             foreach (FeedImportSetting importSetting in SupplierSettings.FeedImportSettings)
             {
-                ReadImportConfigurationFromGD(importSetting);
+                if (importSetting.Name == importConfigFileName)
+                {
+                    // Konfigurace - pravdila
+                    ReadImportConfigRulesFromGD(importSetting);
+                }
+                else if (importSetting.Name.Contains("WL"))
+                {
+                    ReadImportConfigWlBlFromGD(importSetting);
+                }
+                else if (importSetting.Name.Contains("BL"))
+                {
+                    ReadImportConfigWlBlFromGD(importSetting);
+                }
+
             }
         }
 
-        private void ReadImportConfigurationFromGD(FeedImportSetting setting)
+        private void ReadImportConfigRulesFromGD(FeedImportSetting setting)
         {
+            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "json"), setting.MimeType);
+
+            FeedConfiguration ic = new FeedConfiguration();
+            ic.LoadConfig(FullFileName(importConfigFileName,"json"));//"Data/TSB-import-config.json"
+
+        }
+
+        private void ReadImportConfigWlBlFromGD(FeedImportSetting setting)
+        {
+            // White/Black listy
             string line;
             List<string> list = new List<string>();
-
-            GoogleDriveAPI gd = new GoogleDriveAPI();
 
             gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "txt"), setting.MimeType);
 
@@ -208,6 +233,7 @@ namespace Jaminet
                     ProductWhiteList = list;
                     break;
             }
+
         }
 
         /// <summary>

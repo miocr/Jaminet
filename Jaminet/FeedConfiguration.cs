@@ -46,7 +46,32 @@ namespace Jaminet
     public class FeedConfiguration
     {
 
+        private DataContractJsonSerializer serializer;
+
         public FeedConfiguration()
+        {
+            serializer = new DataContractJsonSerializer(typeof(ImportConfiguration));
+        }
+
+        public void LoadConfig(string fileName)
+        {
+            ImportConfiguration icx;
+            // JSON musí být UTF-8 !!!
+            // https://cs.wikipedia.org/wiki/Byte_order_mark
+            using (FileStream fsr = File.OpenRead(fileName))
+            {
+                if (fsr.ReadByte() == 0xEF)
+                    // přeskočit BOM ! JSON deserializer umi jen UTF-8 bez BOM
+                    fsr.Position = 3; 
+                else
+                    // není B0M, čteme od 0
+                    fsr.Position = 0;  
+                
+                icx = (ImportConfiguration)serializer.ReadObject(fsr);
+            }
+        }
+
+        public void SaveConfig()
         {
             /*
             DataContractJsonSerializerSettings settings = new DataContractJsonSerializerSettings();
@@ -60,10 +85,7 @@ namespace Jaminet
 
             DataContractJsonSerializer des = new DataContractJsonSerializer(typeof(ImportConfiguration), settings);
             */
-
-
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(ImportConfiguration));
-
+       
             ImportConfigurationRuleCondition icrc = new ImportConfigurationRuleCondition
             {
                 Element = "element",
@@ -90,16 +112,12 @@ namespace Jaminet
                 serializer.WriteObject(fsw, ic);
             }
 
-            ImportConfiguration icx;
-            using (FileStream fsr = File.OpenRead(@"Data/import-config-example.json"))
-            {
-                icx = (ImportConfiguration)serializer.ReadObject(fsr);
-            }
 
-            using (FileStream fsw = File.OpenWrite(@"Data/import-config-example-out.json"))
-            {
-                serializer.WriteObject(fsw, icx);
-            }
+
+            //using (FileStream fsw = File.OpenWrite(@"Data/import-config-example-out.json"))
+            //{
+            //    serializer.WriteObject(fsw, icx);
+            //}
 
         }
     }
