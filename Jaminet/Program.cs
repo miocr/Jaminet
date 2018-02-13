@@ -17,7 +17,7 @@ namespace Jaminet
             tsb.ReadImportConfiguration();
 
 
-            FeedConfiguration fc = new FeedConfiguration();
+            //FeedConfiguration fc = new FeedConfiguration();
 
 
             //tsb.GetAndSaveFeed();
