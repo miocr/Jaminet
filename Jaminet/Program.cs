@@ -16,25 +16,23 @@ namespace Jaminet
 
             tsb.ReadImportConfiguration();
 
-
             //FeedConfiguration fc = new FeedConfiguration();
-
 
             //tsb.GetAndSaveFeed();
 
-            tsb.LoadFeed();
+            //tsb.LoadFeed();
 
-            XElement extParameters = null;
+            //XElement extParameters = null;
 
-            extParameters = tsb.GetHeurekaProductsParameters();
-            tsb.SaveHeurekaProductsParameters(extParameters);
-            extParameters = tsb.LoadHeurekaProductsParameters();
+            //extParameters = tsb.GetHeurekaProductsParameters();
+            //tsb.SaveHeurekaProductsParameters(extParameters);
+            //extParameters = tsb.LoadHeurekaProductsParameters();
 
-            tsb.FilterFeed();
+            //tsb.FilterFeed();
 
-            tsb.MergeFeedWithExtParameters(extParameters);
+            //tsb.MergeFeedWithExtParameters(extParameters);
 
-            tsb.SaveFeed(true);
+            //tsb.SaveFeed(true);
 
             Console.WriteLine("Press any key...");
             Console.Read();
