@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0">
+  <Rules>
+    <Rule>
+      <Operation>item-disable</Operation>
+      <Element>element</Element>
+      <NewValue>100</NewValue>
+      <Conditions>
+        <Condition Order="1">
+          <Element>SHOP/SHOPITEM/STOCK/AMOUNT</Element>
+          <Operator>&lt;</Operator>
+          <Value>5</Value>
+        </Condition>
+      </Conditions>
+    </Rule>
+    <Rule>
+      <Operation>change-value</Operation>
+      <Element>element</Element>
+      <NewValue>100</NewValue>
+      <Conditions>
+        <Condition Order="1" NextCondition="and">
+          <Element>SHOP/SHOPITEM/STOCK/AMOUNT</Element>
+          <Operator>==</Operator>
+          <Value>50</Value>
+        </Condition>
+        <Condition Order="2">
+          <Element>SHOP/SHOPITEM/CATEGORIES/CATEGORY</Element>
+          <Operator>Contains</Operator>
+          <Value>Spotřební materiál &amp;gt; Papír</Value>
+        </Condition>
+      </Conditions>
+    </Rule>
+  </Rules>
+</ImportConfiguration>

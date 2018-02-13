@@ -14,9 +14,10 @@ namespace Jaminet
         {
             TSBohemia tsb = new TSBohemia();
 
-            tsb.ReadImportConfiguration();
+            //tsb.ReadImportConfiguration();
 
-            //FeedConfiguration fc = new FeedConfiguration();
+            ImportConfiguration ic = tsb.LoadConfig();
+            tsb.SaveConfig(ic);
 
             //tsb.GetAndSaveFeed();
 

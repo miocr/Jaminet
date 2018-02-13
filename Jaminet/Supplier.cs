@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Jaminet
         public string FeedUrl { get; set; }
         public string FeedUrlLogin { get; set; }
         public string FeedUrlPassword { get; set; }
+
         public List<FeedImportSetting> FeedImportSettings { get; set; }
 
         public SupplierSettings()
@@ -52,9 +54,9 @@ namespace Jaminet
 
         public List<string> CategoryWhiteList { get; set; }
         public List<string> CategoryBlackList { get; set; }
-
         public List<string> ProductWhiteList { get; set; }
         public List<string> ProductBlackList { get; set; }
+        public ImportConfiguration ImportConfig { get; set; }
 
         public Supplier()
         {
@@ -187,11 +189,8 @@ namespace Jaminet
 
         private void ReadImportConfigRulesFromGD(FeedImportSetting setting)
         {
-            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "json"), setting.MimeType);
-
-            FeedConfiguration ic = new FeedConfiguration();
-            ic.LoadConfig(FullFileName(importConfigFileName,"json"));//"Data/TSB-import-config.json"
-
+            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "xml"), setting.MimeType);
+            ImportConfig = LoadConfig();
         }
 
         private void ReadImportConfigWlBlFromGD(FeedImportSetting setting)
@@ -467,6 +466,89 @@ namespace Jaminet
             string fullPathFileName = Path.Combine(dataFolder, String.Concat(SupplierSettings.SupplierCode, "-", fileName, ".", extension));
             return fullPathFileName;
         }
+
+        public ImportConfiguration LoadConfig()
+        {
+            ImportConfiguration ic = null;
+            try
+            {
+                using (FileStream fsr = File.OpenRead(FullFileName(importConfigFileName, "xml")))
+                {
+                    #region Oprava BOM (potøebuje se pouze pro JSON deserialize)
+                    // JSON musí být UTF-8 !!!
+                    // https://cs.wikipedia.org/wiki/Byte_order_mark
+                    //if (fsr.ReadByte() == 0xEF)
+                    //    // pøeskoèit BOM ! JSON deserializer umi jen UTF-8 bez BOM
+                    //    fsr.Position = 3; 
+                    //else
+                    //    // není B0M, èteme od 0
+                    //    fsr.Position = 0;
+                    #endregion
+
+                    XmlSerializer serializer = new XmlSerializer(typeof(ImportConfiguration));
+                    ic = (ImportConfiguration)serializer.Deserialize(fsr);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("XML config deserialize exception: {0}", ex.Message);
+            }
+            return ic;
+        }
+
+        public void SaveConfig(ImportConfiguration ic)
+        {
+            try
+            {
+                using (FileStream fsw = File.OpenWrite(@"Data/test-out.xml"))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(ImportConfiguration));
+                    serializer.Serialize(fsw, ic);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("XML config serialize exception: {0}", ex.Message);
+            }
+        }
+
+        private ImportConfiguration SampleData()
+        {
+            ImportConfigurationRuleCondition icrc1 = new ImportConfigurationRuleCondition
+            {
+                Element = "SHOP/SHOPITEM/STOCK/AMOUNT",
+                Operator = "==",
+                Value = "50",
+                NextCondition = "and"
+            };
+
+            ImportConfigurationRuleCondition icrc2 = new ImportConfigurationRuleCondition
+            {
+                Element = "SHOP/SHOPITEM/CATEGORIES/CATEGORY",
+                Operator = "Contains",
+                Value = "Spotøební materiál &gt; Papír",
+                NextCondition = null
+            };
+
+            ImportConfigurationRule icr = new ImportConfigurationRule
+            {
+                Operation = "item-disable",
+                Element = "element",
+                NewValue = "100",
+                Conditions = new List<ImportConfigurationRuleCondition>() { icrc1, icrc2 }
+            };
+
+            ImportConfiguration ic = new ImportConfiguration
+            {
+                Version = "1.0",
+                Rules = new List<ImportConfigurationRule>() { icr }
+            };
+
+            return ic;
+        }
+
+
+
     }
 }
 
