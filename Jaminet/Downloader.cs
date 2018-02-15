@@ -71,8 +71,9 @@ namespace Jaminet
 
             using (Stream cs = await response.Content.ReadAsStreamAsync())
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Yellow;
 
                 using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 {
@@ -100,6 +101,7 @@ namespace Jaminet
                 }
 
             }
+            
             Console.WriteLine("\nDownload finished ({0} Bytes)", totalRead);
             Console.ResetColor();
 

@@ -18,7 +18,7 @@ namespace Jaminet
                 SupplierCode = "TSB",
                 // FeedFull https://cdn1.tsbohemia.cz/export/ab3cbae0337bead9c7fdfbc97657653b/products.xml
                 // FeedOnlyStock https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml
-                FeedUrl = "https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml",
+                FeedUrl = "https://cdn1.tsbohemia.cz/export/ab3cbae0337bead9c7fdfbc97657653b/products.xml",
                 FeedUrlLogin = null,
                 FeedUrlPassword = null
             };

@@ -16,14 +16,14 @@ namespace Jaminet
 
         [XmlArrayItem("Rule")]
         [XmlArray(Order = 1)]
-        public List<ImportConfigurationRule> Rules;
+        public List<Rule> Rules;
     }
 
     [Serializable]
-    public class ImportConfigurationRule
+    public class Rule
     {
         [XmlElement(Order = 1)]
-        public string Operation { get; set; }
+        public string RuleType { get; set; }
 
         [XmlElement(Order = 2)]
         public string Element { get; set; }
@@ -33,11 +33,11 @@ namespace Jaminet
 
         [XmlArrayItem("Condition")]
         [XmlArray(Order = 4)]
-        public List<ImportConfigurationRuleCondition> Conditions;
+        public List<RuleCondition> Conditions;
     }
 
     [Serializable]
-    public class ImportConfigurationRuleCondition
+    public class RuleCondition
     {
         [XmlAttribute]
         //[XmlElement(Order = 1, IsNullable = true)]

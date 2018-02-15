@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using System.Linq;
 using System.Text;
 using System.Net.Http;
@@ -62,13 +63,7 @@ namespace Jaminet
         {
         }
 
-        protected void Initialize(SupplierSettings supplierSetiings)
-        {
-            SupplierSettings = supplierSetiings;
-        }
-
-
-        public void GetAndSaveFeed()
+        public virtual void GetAndSaveFeed()
         {
             Downloader downloader = new Downloader(SupplierSettings.FeedUrlLogin, SupplierSettings.FeedUrlPassword);
             long content = downloader.DownloadFile(SupplierSettings.FeedUrl, FullFileName(feedFileName, "xml"));
@@ -79,7 +74,7 @@ namespace Jaminet
             Feed = null;
             try
             {
-                Console.WriteLine("Loading feed from file '{0}'", FullFileName(feedFileName, "xml"));
+                Console.WriteLine("Loading feed from file '{0}'\n", FullFileName(feedFileName, "xml"));
                 using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
@@ -92,9 +87,7 @@ namespace Jaminet
             return Feed;
         }
 
-
-
-        public virtual void SaveFeed(bool isFeedMerged)
+        public virtual void SaveFeed(bool isFeedMerged = true)
         {
             if (Feed != null)
             {
@@ -160,7 +153,7 @@ namespace Jaminet
             }
         }
 
-        public void ReadImportConfiguration()
+        public virtual void ReadImportConfiguration()
         {
             if (gd == null)
                 gd = new GoogleDriveAPI();
@@ -185,54 +178,7 @@ namespace Jaminet
                 }
 
             }
-        }
-
-        private void ReadImportConfigRulesFromGD(FeedImportSetting setting)
-        {
-            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "xml"), setting.MimeType);
-            ImportConfig = LoadConfig();
-        }
-
-        private void ReadImportConfigWlBlFromGD(FeedImportSetting setting)
-        {
-            // White/Black listy
-            string line;
-            List<string> list = new List<string>();
-
-            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "txt"), setting.MimeType);
-
-            try
-            {
-                using (TextReader tr = File.OpenText(FullFileName(setting.Name, "txt")))
-                {
-                    while ((line = tr.ReadLine()) != null)
-                    {
-                        if (!list.Contains(line))
-                            list.Add(line);
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("ReadImportConfigurationFromGD Exception:{0}", exc.Message);
-            }
-
-            switch (setting.Name)
-            {
-                case categoryBLfileName:
-                    CategoryBlackList = list;
-                    break;
-                case categoryWLfileName:
-                    CategoryWhiteList = list;
-                    break;
-                case productBLfileName:
-                    ProductBlackList = list;
-                    break;
-                case productWLfileName:
-                    ProductWhiteList = list;
-                    break;
-            }
-
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -243,24 +189,56 @@ namespace Jaminet
             if (CategoryBlackList == null || CategoryWhiteList == null ||
                 ProductWhiteList == null || ProductBlackList == null)
             {
-                Console.WriteLine("Eror - incomplete configuration.");
+                Console.WriteLine("Error - incomplete configuration.");
                 return;
             }
+
+            LoadFeed();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Proccessing feed by configuration...");
 
             bool itemEnabled;
 
             FeedFiltered = new XElement("SHOP");
 
-            int filteredCount = 0;
+            int enabledCount = 0;
+            int disabledByListsCount = 0;
+            int disabledByRuleCount = 0;
+            int totalCount = 0;
+
             foreach (XElement origItem in Feed.Descendants("SHOPITEM"))
             {
-                itemEnabled = ChechProductByWBList(origItem);
-                if (itemEnabled)
+                totalCount++;
+
+                itemEnabled = ChechProductByRules(origItem);
+                // polozku zakazanou pravidly uz nemuze povolit ani WhiteList
+                if (itemEnabled == false)
                 {
-                    filteredCount++;
-                    FeedFiltered.Add(origItem);
+                    disabledByRuleCount++;
+                }
+                else
+                {
+                    // polozku NEzakazanou pravidly muze zakazat BlackList
+                    itemEnabled = ChechProductByWBList(origItem);
+                    if (itemEnabled)
+                    {
+                        enabledCount++;
+                        FeedFiltered.Add(origItem);
+                    }
+                    else
+                    {
+                        disabledByListsCount++;
+                    }
                 }
             }
+            Console.WriteLine("finished !");
+            Console.WriteLine("Total items in source feed: {0}", totalCount);
+            Console.WriteLine("Disabled items by rules: {0}", disabledByRuleCount);
+            Console.WriteLine("Disabled items by black lists: {0}", disabledByListsCount);
+            Console.WriteLine("Items in target feed: {0}", enabledCount);
+            Console.WriteLine();
+            Console.ResetColor();
         }
 
         /// <summary>
@@ -334,63 +312,6 @@ namespace Jaminet
             }
         }
 
-        private bool ChechProductByWBList(XElement item)
-        {
-            bool enabled = true;
-            foreach (XElement itemCategory in item.Descendants("CATEGORY"))
-            {
-                enabled = true;
-                foreach (string categoryBL in CategoryBlackList)
-                {
-                    if (itemCategory.Value.StartsWith(categoryBL,
-                        StringComparison.CurrentCultureIgnoreCase))
-                    {
-                        enabled = false;
-                        // prvni zakaz staci, dalsi neoverujeme
-                        break;
-                    }
-                }
-
-
-                // WhiteList overime jen pokud je polozka zakazana podle BL
-                // protoze povoleni podle WL ma vyssi prioritu nez BL. 
-                // Pokud neni zakazana podle BL, je zbytecne ji znovu povolovat
-                if (enabled == false)
-                {
-                    foreach (string categoryWL in CategoryWhiteList)
-                    {
-                        if (itemCategory.Value.StartsWith(categoryWL,
-                                StringComparison.CurrentCultureIgnoreCase))
-                        {
-                            enabled = true;
-                            // prvni povoleni staci, dalsi neoverujeme
-                            break;
-                        }
-                    }
-                }
-
-
-            }
-
-            string code = item.Element("CODE").Value;
-            if (!String.IsNullOrEmpty(code))
-            {
-                enabled = true;
-                if (ProductBlackList.Contains(code))
-                    enabled = false;
-
-                // WhiteList overime jen pokud je polozka zakazana
-                // Pokud je povolena, je zbytecne ji znovu povolovat
-                if (enabled == false)
-                {
-                    if (ProductWhiteList.Contains(code))
-                        enabled = true;
-                }
-            }
-
-            return enabled;
-        }
-
         public virtual XElement GetHeurekaProductsParameters(bool onlyNew = false)
         {
             //throw new Exception("GetHeurekaProductsParameters not implemented for SupplierCode " + SupplierSettings.SupplierCode);
@@ -453,12 +374,31 @@ namespace Jaminet
             return result;
         }
 
-        public virtual void InitRemoteSetttings(List<FeedImportSetting> settings)
+        public virtual void SaveConfig(ImportConfiguration ic)
         {
-
+            try
+            {
+                using (FileStream fsw = File.OpenWrite(@"Data/test-out.xml"))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(ImportConfiguration));
+                    serializer.Serialize(fsw, ic);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("XML config serialize exception: {0}", ex.Message);
+            }
         }
 
-        public string FullFileName(string fileName, string extension)
+
+        //---------------------------------------------------------------------------------
+
+        protected void Initialize(SupplierSettings supplierSetiings)
+        {
+            SupplierSettings = supplierSetiings;
+        }
+
+        protected string FullFileName(string fileName, string extension)
         {
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);
@@ -467,7 +407,13 @@ namespace Jaminet
             return fullPathFileName;
         }
 
-        public ImportConfiguration LoadConfig()
+        private void ReadImportConfigRulesFromGD(FeedImportSetting setting)
+        {
+            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "xml"), setting.MimeType);
+            ImportConfig = LoadConfig();
+        }
+
+        private ImportConfiguration LoadConfig()
         {
             ImportConfiguration ic = null;
             try
@@ -496,25 +442,168 @@ namespace Jaminet
             return ic;
         }
 
-        public void SaveConfig(ImportConfiguration ic)
+        private void ReadImportConfigWlBlFromGD(FeedImportSetting setting)
         {
+            // White/Black listy
+            string line;
+            List<string> list = new List<string>();
+
+            gd.DownloadFile(setting.GoogleDriveFileId, FullFileName(setting.Name, "txt"), setting.MimeType);
+
             try
             {
-                using (FileStream fsw = File.OpenWrite(@"Data/test-out.xml"))
+                using (TextReader tr = File.OpenText(FullFileName(setting.Name, "txt")))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(ImportConfiguration));
-                    serializer.Serialize(fsw, ic);
+                    while ((line = tr.ReadLine()) != null)
+                    {
+                        if (!list.Contains(line))
+                            list.Add(line);
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (Exception exc)
             {
-                Console.WriteLine("XML config serialize exception: {0}", ex.Message);
+                Console.WriteLine("ReadImportConfigurationFromGD Exception:{0}", exc.Message);
+            }
+
+            switch (setting.Name)
+            {
+                case categoryBLfileName:
+                    CategoryBlackList = list;
+                    break;
+                case categoryWLfileName:
+                    CategoryWhiteList = list;
+                    break;
+                case productBLfileName:
+                    ProductBlackList = list;
+                    break;
+                case productWLfileName:
+                    ProductWhiteList = list;
+                    break;
+            }
+
+        }
+
+        private bool ChechProductByWBList(XElement item)
+        {
+            bool enabled = true;
+            foreach (XElement itemCategory in item.Descendants("CATEGORY"))
+            {
+                enabled = true;
+                foreach (string categoryBL in CategoryBlackList)
+                {
+                    if (itemCategory.Value.StartsWith(categoryBL,
+                        StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        enabled = false;
+                        // prvni zakaz staci, dalsi neoverujeme
+                        break;
+                    }
+                }
+
+
+                // WhiteList overime jen pokud je polozka zakazana podle BL
+                // protoze povoleni podle WL ma vyssi prioritu nez BL. 
+                // Pokud neni zakazana podle BL, je zbytecne ji znovu povolovat
+                if (enabled == false)
+                {
+                    foreach (string categoryWL in CategoryWhiteList)
+                    {
+                        if (itemCategory.Value.StartsWith(categoryWL,
+                                StringComparison.CurrentCultureIgnoreCase))
+                        {
+                            enabled = true;
+                            // prvni povoleni staci, dalsi neoverujeme
+                            break;
+                        }
+                    }
+                }
+            }
+
+            string code = item.Element("CODE").Value;
+            if (!String.IsNullOrEmpty(code))
+            {
+                if (ProductBlackList.Contains(code))
+                    enabled = false;
+
+                // WhiteList overime jen pokud je polozka zakazana
+                // Pokud je povolena, je zbytecne ji znovu povolovat
+                if (enabled == false)
+                {
+                    if (ProductWhiteList.Contains(code))
+                        enabled = true;
+                }
+            }
+
+            return enabled;
+        }
+
+        private bool ChechProductByRules(XElement item)
+        {
+            bool enabled = true;
+            foreach (Rule rule in ImportConfig.Rules)
+            {
+                switch (rule.RuleType)
+                {
+                    case "stock-amount":
+                        foreach (RuleCondition condition in rule.Conditions)
+                        {
+                            XElement amount = item.XPathSelectElement(condition.Element);
+                            if (amount != null)
+                            {
+                                decimal? elementValue = DecimalParseInvariant(amount.Value);
+                                decimal? conditionValue = DecimalParseInvariant(condition.Value);
+                                if (elementValue.HasValue && conditionValue.HasValue)
+                                {
+                                    switch (condition.Operator)
+                                    {
+                                        case "<":
+                                            enabled = elementValue.Value < conditionValue.Value;
+                                            break;
+                                        case ">":
+                                            enabled = elementValue.Value > conditionValue.Value;
+                                            break;
+                                        case "=":
+                                            enabled = elementValue.Value == conditionValue.Value;
+                                            break;
+                                        case "!=":
+                                            enabled = elementValue.Value != conditionValue.Value;
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            }
+                        }
+                        // splnena podminka ma pro tuto akci "negativni" ucinek, obratime ji
+                        enabled = !enabled;
+                        break;
+                    case "change-value":
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return enabled;
+        }
+
+        private decimal? DecimalParseInvariant(string svalue)
+        {
+            if (decimal.TryParse(svalue, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out decimal dvalue))
+            {
+                return dvalue;
+            }
+            else
+            {
+                return null;
             }
         }
 
         private ImportConfiguration SampleData()
         {
-            ImportConfigurationRuleCondition icrc1 = new ImportConfigurationRuleCondition
+            RuleCondition icrc1 = new RuleCondition
             {
                 Element = "SHOP/SHOPITEM/STOCK/AMOUNT",
                 Operator = "==",
@@ -522,7 +611,7 @@ namespace Jaminet
                 NextCondition = "and"
             };
 
-            ImportConfigurationRuleCondition icrc2 = new ImportConfigurationRuleCondition
+            RuleCondition icrc2 = new RuleCondition
             {
                 Element = "SHOP/SHOPITEM/CATEGORIES/CATEGORY",
                 Operator = "Contains",
@@ -530,18 +619,18 @@ namespace Jaminet
                 NextCondition = null
             };
 
-            ImportConfigurationRule icr = new ImportConfigurationRule
+            Rule icr = new Rule
             {
-                Operation = "item-disable",
+                RuleType = "item-disable",
                 Element = "element",
                 NewValue = "100",
-                Conditions = new List<ImportConfigurationRuleCondition>() { icrc1, icrc2 }
+                Conditions = new List<RuleCondition>() { icrc1, icrc2 }
             };
 
             ImportConfiguration ic = new ImportConfiguration
             {
                 Version = "1.0",
-                Rules = new List<ImportConfigurationRule>() { icr }
+                Rules = new List<Rule>() { icr }
             };
 
             return ic;
