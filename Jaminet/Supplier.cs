@@ -421,7 +421,7 @@ namespace Jaminet
             SupplierSettings = supplierSetiings;
         }
 
-        protected string FullFileName(string fileName, string extension)
+        public string FullFileName(string fileName, string extension)
         {
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);

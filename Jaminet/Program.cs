@@ -97,9 +97,12 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva az 7 hod.
                         }
                         break;
                     case "-GHPF":
-                        extParams = supplier.GetHeurekaProductsParameters(false);
-                        if (extParams != null)
-                            supplier.SaveHeurekaProductsParameters(extParams);
+                        if (supplier != null)
+                        {
+                            extParams = supplier.GetHeurekaProductsParameters(false);
+                            if (extParams != null)
+                                supplier.SaveHeurekaProductsParameters(extParams);
+                        }
                         break;
                     case "-GHPN":
                         if (supplier != null)

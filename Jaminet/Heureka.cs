@@ -52,124 +52,92 @@ namespace Jaminet
             int itemsCounter = 0;
             int foundItemsCounter = 0;
             int notFoundItemsCounter = 0;
-            //int totalParamsGrabbed = 0;
-            //int paramsGrabbed;
 
-            FileStream fs = new FileStream("temp.xml", FileMode.Create, FileAccess.ReadWrite);
-            XmlWriter xw = XmlWriter.Create(fs);
-
-            xw.WriteStartElement("SHOP");
-
-            XElement productParameters;
-            bool foundByEAN = false;
-            bool foundByPN = false;
-
-            foreach (SearchObject search in SearchList)
+            using (FileStream fs = new FileStream("temp.xml", FileMode.Create, FileAccess.ReadWrite))
             {
-                if (itemsCounter % 100 == 0)
+                using (XmlWriter xw = XmlWriter.Create(fs))
                 {
-                    //Console.Clear();
-                    GC.Collect();
-                    Console.Write("           Processed items: {0} [found:{1} | not found:{2}]\r",
-                        itemsCounter, foundItemsCounter, notFoundItemsCounter);
-                }
+                    xw.WriteStartElement("SHOP");
 
-                productParameters = null;
-                try
-                {
-                    foundByPN = false;
-                    foundByEAN = false;
+                    XElement productParameters;
+                    bool foundByEAN = false;
+                    bool foundByPN = false;
 
-                    itemsCounter++;
-
-                    //Console.Write("{0} searching for: {1} > ", itemCounter.ToString("000000"), search.SupplierCode.PadRight(10));
-
-                    if (search.PN != null)
+                    foreach (SearchObject search in SearchList)
                     {
-                        productParameters = GetProductParameters(search.PN, search.Manufacturer);
-                        foundByPN = (productParameters != null);
-                    }
+                        if (itemsCounter % 100 == 0)
+                        {
+                            GC.Collect();
+                            Console.Write("           Processed items: {0} [found:{1} | not found:{2}]\r",
+                                itemsCounter, foundItemsCounter, notFoundItemsCounter);
+                        }
 
-                    if (!foundByPN && search.EAN != null)
-                    {
-                        productParameters = GetProductParameters(search.EAN, search.Manufacturer);
-                        foundByEAN = (productParameters != null);
-                    }
+                        productParameters = null;
+                        try
+                        {
+                            foundByPN = false;
+                            foundByEAN = false;
 
-                    if (foundByPN || foundByEAN)
-                    {
-                        foundItemsCounter++;
-                        //XElement outShopItem = new XElement("SHOPITEM");
-                        xw.WriteStartElement("SHOPITEM");
+                            itemsCounter++;
 
-                        //outShopItem.Add(new XAttribute();
-                        xw.WriteAttributeString("CODE", search.SupplierCode);
+                            if (search.PN != null)
+                            {
+                                productParameters = GetProductParameters(search.PN, search.Manufacturer);
+                                foundByPN = (productParameters != null);
+                            }
 
-                        //outShopItem.Add(productParameters);
-                        productParameters.WriteTo(xw);
+                            if (!foundByPN && search.EAN != null)
+                            {
+                                productParameters = GetProductParameters(search.EAN, search.Manufacturer);
+                                foundByEAN = (productParameters != null);
+                            }
 
-                        //outShopItems.Add(outShopItem);
-                        xw.WriteEndElement(); //SHOPITEM
+                            if (foundByPN || foundByEAN)
+                            {
+                                foundItemsCounter++;
+                                xw.WriteStartElement("SHOPITEM");
 
-                        //paramsGrabbed = productParameters.Descendants("INFORMATION_PARAMETER").Count();
-                        //totalParamsGrabbed += paramsGrabbed;
-                        /*
-                        Console.Write("found {0} parameters ", paramsCount);
-                        if (foundByEAN)
-                            Console.WriteLine("by EAN:{0}", search.EAN);
-                        else if (foundByPN)
-                            Console.WriteLine("by PN:{0}", search.PN);
-                        else
+                                xw.WriteAttributeString("CODE", search.SupplierCode);
+
+                                productParameters.WriteTo(xw);
+
+                                xw.WriteEndElement(); //SHOPITEM
+                            }
+                            else
+                            {
+                                notFoundItemsCounter++;
+                            }
+
+                            Console.Write(">");
+                            if (itemsCounter % 10 == 0)
+                                Console.Write("\r");
+
+                            productParameters = null;
+
+                        }
+                        catch (Exception ex)
+                        {
                             Console.WriteLine();
-                        */
-                        //Console.Write("+");
-                    }
-                    else
-                    {
-                        notFoundItemsCounter++;
-                        /*
-                        Console.WriteLine("not found");
-                        */
-                        //Console.Write("-");
+                            Console.WriteLine("Exception with SHOPITEM code:{0}, Exception:{1}",
+                                search.SupplierCode, ex.Message);
+                        }
+
                     }
 
-                    Console.Write(">");
-                    if (itemsCounter % 10 == 0)
-                        Console.Write("\r");
-
-                    //switch (itemsCounter % 4)
-                    //{
-                    //    case 0: Console.Write("\r/"); break;
-                    //    case 1: Console.Write("\r-"); break;
-                    //    case 2: Console.Write("\r\\"); break;
-                    //    case 3: Console.Write("\r|"); break;
-                    //}
-
-                    productParameters = null;
-                    
+                    xw.WriteEndElement();
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Exception with SHOPITEM code:{0}, Exception:{1}",
-                        search.SupplierCode, ex.Message);
-                }
-                
             }
 
-            xw.WriteEndElement();
-
-            xw.Flush();
-            fs.Flush();
-
-            xw.Dispose();
-            fs.Dispose();
-
             TimeSpan span = DateTime.Now - startTime;
-            Console.WriteLine("Finished! Grabbed {0} products, total time: {1}",
-                itemsCounter, span.ToString());
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Finished! Processing time: {0}", span.ToString());
+            Console.WriteLine("Processed items: {0}", itemsCounter);
+            Console.WriteLine("Found items: {0}", foundItemsCounter);
+            Console.WriteLine("NotFound items: {0}", notFoundItemsCounter);
+            Console.WriteLine();
+            Console.ResetColor();
 
-            //return outShopItems;
             return XElement.Load("temp.xml");
         }
 
@@ -196,10 +164,7 @@ namespace Jaminet
                 {
                     foundByPN = false;
                     foundByEAN = false;
-
                     itemsCounter++;
-
-                    //Console.Write("{0} searching for: {1} > ", itemCounter.ToString("000000"), search.SupplierCode.PadRight(10));
 
                     if (search.EAN != null)
                     {
@@ -224,22 +189,10 @@ namespace Jaminet
 
                         paramsGrabbed = productParameters.Descendants("INFORMATION_PARAMETER").Count();
                         totalParamsGrabbed += paramsGrabbed;
-                        /*
-                        Console.Write("found {0} parameters ", paramsCount);
-                        if (foundByEAN)
-                            Console.WriteLine("by EAN:{0}", search.EAN);
-                        else if (foundByPN)
-                            Console.WriteLine("by PN:{0}", search.PN);
-                        else
-                            Console.WriteLine();
-                        */
-                        Console.Write("+");
                     }
                     else
                     {
                         notFoundItemsCounter++;
-                        //Console.WriteLine("not found");
-                        Console.Write("-");
                     }
 
                 }
@@ -252,8 +205,7 @@ namespace Jaminet
 
                 if (itemsCounter % 100 == 0)
                 {
-                    //Console.Clear();
-                    Console.WriteLine("Processed items {0} [found:{1}, not found:{2}]",itemsCounter, foundItemsCounter, notFoundItemsCounter);
+                    Console.WriteLine("Processed items {0} [found:{1}, not found:{2}]", itemsCounter, foundItemsCounter, notFoundItemsCounter);
                     GC.Collect();
                 }
             }
@@ -269,7 +221,7 @@ namespace Jaminet
         {
             XElement parameters = null;
             string paramString = GetParameters(searchText, producer);
-            if (!String.IsNullOrEmpty(paramString))
+            if (!string.IsNullOrEmpty(paramString))
             {
                 parameters = ParseToXml(paramString);
             }
@@ -475,7 +427,5 @@ namespace Jaminet
 
             return outRoot;
         }
-
-
     }
 }
