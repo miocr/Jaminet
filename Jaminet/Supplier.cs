@@ -43,15 +43,15 @@ namespace Jaminet
         public const string productBLfileName = "products-BL";
         public const string importConfigFileName = "import-config";
 
-        public const string feedFileName = "feed";
-        public const string feedMergedFileName = "feed-merged";
+        public const string feedFileName = "feed-original";
+        public const string feedProcessedFileName = "feed-processed";
 
         public const string ExtParametersFileName = "ext-products-parameters";
 
         protected SupplierSettings SupplierSettings { get; set; }
 
         public XElement Feed { get; set; }
-        public XElement FeedFiltered { get; set; }
+        public XElement FeedProcessed { get; set; }
 
         public List<string> CategoryWhiteList { get; set; }
         public List<string> CategoryBlackList { get; set; }
@@ -87,27 +87,43 @@ namespace Jaminet
             return Feed;
         }
 
-        public virtual void SaveFeed(bool isFeedMerged = true)
+        public virtual void SaveFeed(bool isProcessed = true)
         {
-            if (Feed != null)
+            try
             {
-                try
+                if (isProcessed)
                 {
-                    string fileName = isFeedMerged ? feedMergedFileName : feedFileName;
-                    using (FileStream fs = new FileStream(FullFileName(fileName, "xml"),
-                        FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    if (FeedProcessed != null)
                     {
-                        Feed.Save(fs);
+                        //using (FileStream fs = File.Create(FullFileName(feedProcessedFileName, "xml")))
+                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            FeedProcessed.Save(fs);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("SaveFeed error - FeedProcessed is empty");
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Console.WriteLine("SaveFeed Exception: {0}", ex.Message);
+                    if (Feed != null)
+                    {
+                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            Feed.Save(fs);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("SaveFeed error - Feed is empty");
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("SaveFeed error - Feed is empty");
+                Console.WriteLine("SaveFeed Exception: {0}", ex.Message);
             }
         }
 
@@ -159,7 +175,7 @@ namespace Jaminet
                 gd = new GoogleDriveAPI();
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Reading import configurations ...");
+            Console.WriteLine("Reading import configuration for supplier '{0}'", SupplierSettings.SupplierCode);
             Console.ResetColor();
             foreach (FeedImportSetting importSetting in SupplierSettings.FeedImportSettings)
             {
@@ -181,10 +197,7 @@ namespace Jaminet
             Console.WriteLine();
         }
 
-        /// <summary>
-        /// Filters the feed.
-        /// </summary>
-        public virtual void FilterFeed()
+        public virtual void ProcessFeed()
         {
             if (CategoryBlackList == null || CategoryWhiteList == null ||
                 ProductWhiteList == null || ProductBlackList == null)
@@ -196,11 +209,11 @@ namespace Jaminet
             LoadFeed();
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Proccessing feed by configuration...");
+            Console.Write("Processing feed by configuration...");
 
-            bool itemEnabled;
+            bool enabled;
 
-            FeedFiltered = new XElement("SHOP");
+            FeedProcessed = new XElement("SHOP");
 
             int enabledCount = 0;
             int disabledByListsCount = 0;
@@ -209,22 +222,31 @@ namespace Jaminet
 
             foreach (XElement origItem in Feed.Descendants("SHOPITEM"))
             {
+#if DEBUG
+                string itemCode = null;
+                if (origItem.Element("CODE") != null)
+                    itemCode = origItem.Element("CODE").Value;
+#endif
+
                 totalCount++;
 
-                itemEnabled = ChechProductByRules(origItem);
-                // polozku zakazanou pravidly uz nemuze povolit ani WhiteList
-                if (itemEnabled == false)
+                // zpracujeme pravidla 
+                enabled = ProcessItemByRules(origItem);
+
+                // polozku zakazanou nekterym z pravidel uz nemuze povolit ani WhiteList
+                if (enabled == false)
                 {
                     disabledByRuleCount++;
                 }
                 else
                 {
-                    // polozku NEzakazanou pravidly muze zakazat BlackList
-                    itemEnabled = ChechProductByWBList(origItem);
-                    if (itemEnabled)
+                    // polozku NEzakazanou pravidly zpracujeme podle Black/WhiteListu
+                    // mohou ji zakazat
+                    enabled = ChechProductByWBList(origItem);
+                    if (enabled)
                     {
                         enabledCount++;
-                        FeedFiltered.Add(origItem);
+                        FeedProcessed.Add(origItem);
                     }
                     else
                     {
@@ -233,10 +255,10 @@ namespace Jaminet
                 }
             }
             Console.WriteLine("finished !");
-            Console.WriteLine("Total items in source feed: {0}", totalCount);
-            Console.WriteLine("Disabled items by rules: {0}", disabledByRuleCount);
-            Console.WriteLine("Disabled items by black lists: {0}", disabledByListsCount);
-            Console.WriteLine("Items in target feed: {0}", enabledCount);
+            Console.WriteLine("Items in original feed: {0}", totalCount);
+            Console.WriteLine("Items in processed feed: {0}", enabledCount);
+            Console.WriteLine("* disabled items by rules: {0}", disabledByRuleCount);
+            Console.WriteLine("* disabled items by black lists: {0}", disabledByListsCount);
             Console.WriteLine();
             Console.ResetColor();
         }
@@ -314,12 +336,13 @@ namespace Jaminet
 
         public virtual XElement GetHeurekaProductsParameters(bool onlyNew = false)
         {
-            //throw new Exception("GetHeurekaProductsParameters not implemented for SupplierCode " + SupplierSettings.SupplierCode);
-
             XElement result = null;
 
             if (Feed == null)
-                return result;
+                LoadFeed();
+
+            if (Feed == null)
+                return null;
 
             Heureka heureka = new Heureka(this);
 
@@ -538,55 +561,235 @@ namespace Jaminet
             return enabled;
         }
 
-        private bool ChechProductByRules(XElement item)
+
+        /// <summary>
+        /// Zpracuje všechna pravidla konfigurace import pro danou položky
+        /// </summary>
+        /// <param name="item">položka feedu</param>
+        /// <returns>
+        /// Pokud jsou pravidla pro zákaz/povolení položky, vrací výsledek podmínek. Pro 
+        /// jiná pravidla vrací true jako default.
+        /// </returns>
+        private bool ProcessItemByRules(XElement item)
         {
-            bool enabled = true;
+            // nastavuje se pouze pro pravdila typu enable/disable item
+            // pro ostatní pravidla (napø.zmìna hodnoty) je vždy true 
+            bool isEnabbled = true;
+
             foreach (Rule rule in ImportConfig.Rules)
             {
-                switch (rule.RuleType)
+                switch (rule.RuleType.ToLower())
                 {
-                    case "stock-amount":
-                        foreach (RuleCondition condition in rule.Conditions)
+                    case "enable-disable-item":
+
+                        if (rule.Conditions == null)
+                            break;
+
+                        for (int i = 0; i < rule.Conditions.Count; i++)
                         {
-                            XElement amount = item.XPathSelectElement(condition.Element);
-                            if (amount != null)
+                            RuleCondition condition = rule.Conditions[i];
+                            XElement conditionElement = item.XPathSelectElement(condition.Element);
+                            if (conditionElement == null)
                             {
-                                decimal? elementValue = DecimalParseInvariant(amount.Value);
-                                decimal? conditionValue = DecimalParseInvariant(condition.Value);
-                                if (elementValue.HasValue && conditionValue.HasValue)
-                                {
-                                    switch (condition.Operator)
-                                    {
-                                        case "<":
-                                            enabled = elementValue.Value < conditionValue.Value;
-                                            break;
-                                        case ">":
-                                            enabled = elementValue.Value > conditionValue.Value;
-                                            break;
-                                        case "=":
-                                            enabled = elementValue.Value == conditionValue.Value;
-                                            break;
-                                        case "!=":
-                                            enabled = elementValue.Value != conditionValue.Value;
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
+                                // Pokud polozka nema element potrebny k vyhodoceni podmky, 
+                                // povazujeme pro tento typ pravidla vyzledek za TRUE
+                                isEnabbled = true;
+                            }
+                            else
+                            {
+                                isEnabbled = EvaluateRule(condition.Operator, conditionElement.Value, condition.Value, true);
+                                // Toto pravidlo musí mít jednu pomínku
+                                // TODO - ošetøit a vyvolat vyjímky pro pøípad více pravidel u stock-amount
                             }
                         }
-                        // splnena podminka ma pro tuto akci "negativni" ucinek, obratime ji
-                        enabled = !enabled;
+
+                        // splnena podminka ma pro tuto akci ma "negativni" ucinek a obratime ji (polozka zakazana)
+                        isEnabbled = !isEnabbled;
                         break;
-                    case "change-value":
+
+                    case "change-item-value":
+                        string previousConditionOperator = null;
+                        bool tmpCondResult = true;
+                        bool tmpAllCondsResult = tmpCondResult;
+
+                        // Vyhodnotime vsechny podminky
+                        for (int i = 0; i < rule.Conditions.Count; i++)
+                        {
+                            RuleCondition condition = rule.Conditions[i];
+                            XElement conditionElement = item.XPathSelectElement(condition.Element);
+                            if (conditionElement == null)
+                            {
+                                // Pokud polozka nema element potrebny k vyhodoceni podmky
+                                // povzaujeme pro tento typ pravidla za FALSE
+                                tmpCondResult = false;
+                            }
+                            else
+                            {
+                                tmpCondResult = EvaluateRule(condition.Operator, conditionElement.Value, condition.Value, false);
+                            }
+
+                            if (previousConditionOperator != null)
+                            {
+                                // zpracujeme operator z predchozi a soucasne podminky
+                                switch (previousConditionOperator)
+                                {
+                                    case null:
+                                        // prvni podminka, ale existuje dalsi
+                                        tmpAllCondsResult = isEnabbled;
+                                        break;
+                                    case "and":
+                                        tmpAllCondsResult = tmpAllCondsResult && isEnabbled;
+                                        break;
+                                    case "or":
+                                        tmpAllCondsResult = tmpAllCondsResult || isEnabbled;
+                                        break;
+                                    default:
+                                        throw new Exception(
+                                            String.Format("Unknown condition operator {0} for rule {1}",
+                                            previousConditionOperator, rule.RuleType));
+                                }
+                            }
+
+                            if (condition.NextCondition == null)
+                                // byla to posledni podminka
+                                break;
+                            else
+                            {
+                                // bude dalsi podminka
+                                previousConditionOperator = condition.NextCondition;
+                                // v pripade vice podminek je po zpracovani prvni podminky
+                                // celkovy vysledek jako podle vysledku prvni podminky
+                                if (i == 0)
+                                    tmpAllCondsResult = tmpCondResult;
+                            }
+                        }
+
+                        // Pokud jsou vsechny podminky splnene, zmenime hodnotu podle pravidla
+                        if (tmpAllCondsResult)
+                        {
+                            if (rule.NewValue != null)
+                            {
+                                XElement valueForChange = item.XPathSelectElement(rule.Element);
+                                if (valueForChange != null)
+                                    valueForChange.Value = rule.NewValue;
+                            }
+                        }
+
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            return isEnabbled;
+        }
+
+        /// <summary>
+        /// Metoda prorovná hodnoty 1/2, podle operátoru urèí, zda se porovnají jako èísla, nebo text
+        /// </summary>
+        /// <param name="conditionOperator">Typ operátoru (<, >, =, !=, equals, contains, startwith, endwith)</param>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="unresolved">Výsledek, pokud se nepodaøí porovnat</param>
+        /// <returns></returns>
+        private bool EvaluateRule(string conditionOperator, string value1, string value2, bool unresolved)
+        {
+            bool result = unresolved;
+
+            switch (conditionOperator.ToLower())
+            {
+                case "equals":
+                case "contains":
+                case "startwith":
+                case "endwith":
+                    result = EvaluateTextRule(conditionOperator, value1, value2, unresolved);
+                    break;
+                case "==":
+                case "!=":
+                case "<":
+                case ">":
+                    result = EvaluateNumericRule(conditionOperator, value1, value2, unresolved);
+                    break;
+                default:
+                    break; ;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Metoda prorovná textové hodnoty 1/2 jako èísla typu decimal 
+        /// </summary>
+        /// <param name="conditionOperator">Typ operátoru (<, >, =, !=)</param>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="unresolved">Výsledek, pokud se nepodaøí provonat</param>
+        /// <returns></returns>
+        private bool EvaluateNumericRule(string conditionOperator, string value1, string value2, bool unresolved)
+        {
+            decimal? number1 = DecimalParseInvariant(value1);
+            decimal? number2 = DecimalParseInvariant(value2);
+            bool result = unresolved;
+
+            if (number1.HasValue && number2.HasValue)
+            {
+                switch (conditionOperator)
+                {
+                    case "<":
+                        result = number1.Value < number2.Value;
+                        break;
+                    case ">":
+                        result = number1.Value > number2.Value;
+                        break;
+                    case "==":
+                        result = number1.Value == number2.Value;
+                        break;
+                    case "!=":
+                        result = number1.Value != number2.Value;
                         break;
                     default:
                         break;
                 }
             }
-            return enabled;
+            return result;
         }
 
+        /// <summary>
+        /// Metoda prorovná textové hodnoty 1/2 jako typ text 
+        /// </summary>
+        /// <param name="conditionOperator">Typ operátoru (equals, contains, startwith, endwith)</param>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <param name="unresolved">Výsledek, pokud se nepodaøí porovnat</param>
+        /// <returns></returns>
+        private bool EvaluateTextRule(string conditionOperator, string value1, string value2, bool unresolved)
+        {
+            bool result = unresolved;
+
+            switch (conditionOperator.ToLower())
+            {
+                case "equals":
+                    result = (value1 == value2);
+                    break;
+                case "contains":
+                    result = value1.Contains(value2);
+                    break;
+                case "startwith":
+                    result = value1.StartsWith(value2);
+                    break;
+                case "endwith":
+                    result = value1.EndsWith(value2);
+                    break;
+                default:
+                    break;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Pøevede text na desetinné èíslo bez ohledu na typ oddìlovaèe (.,)
+        /// </summary>
+        /// <param name="svalue"></param>
+        /// <returns></returns>
         private decimal? DecimalParseInvariant(string svalue)
         {
             if (decimal.TryParse(svalue, System.Globalization.NumberStyles.Any,

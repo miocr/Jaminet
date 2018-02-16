@@ -12,36 +12,50 @@ namespace Jaminet
     {
         static void Main(string[] args)
         {
-
-            ProccessCommandLine(args);
-            //TSBohemia tsb = new TSBohemia();
-
-            //tsb.ReadImportConfiguration();
-
-            //tsb.GetAndSaveFeed();
-
-            //tsb.LoadFeed();
-
-            //XElement extParameters = null;
-
-            //extParameters = tsb.GetHeurekaProductsParameters();
-            //tsb.SaveHeurekaProductsParameters(extParameters);
-            //extParameters = tsb.LoadHeurekaProductsParameters();
-
-            //tsb.FilterFeed();
-
-            //tsb.MergeFeedWithExtParameters(extParameters);
-
-            //tsb.SaveFeed(true);
-
-            Console.WriteLine("Press any key...");
-            Console.Read();
+            ProcessCommandLine(args);
+            //Console.WriteLine("Press any key...");
+            //Console.Read();
         }
 
-        private static void ProccessCommandLine(string[] args)
+        private static void ProcessCommandLine(string[] args)
         {
             Supplier supplier = null;
             XElement extParams = null;
+            if (args.Length == 0 || args[0] == "-?")
+            {
+                #region Help
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine(@"
+Zpracovani feed produktu pro Jaminet.cz 
+Pouziti: dotnet Jaminet -S kod akce1 akce2 akce3 ...
+
+- S kod : povinny prvni parametr, kod je kod dodavatele (napr. 'TSB')
+
+Akce (lze zadat vice, provedeny jsou v poradi zadani):
+- DF    : download a ulozeni feedu dodavatele
+- PF    : zpracovani feedu podle pravidel a white/black listu
+- MEP   : pridani parametru produktu ziskanych z ext.zdroje
+- GHPF  : ziskani parametru k vsem produktum ve feedu z Heureka.cz 
+- GHPN  : ziskani parametru k novym produktum ve feedu z Heureka.cz
+
+Priklady:
+
+dotnet Jaminet -S TSB -DF -PF -MEP 
+
+Provede se download feedu dodavatele TSB, feed se zpracuje podle pravidel, 
+pripoji se parametry produktu ziskane z externiho zdroje a vysledny feed se 
+ulozi na disk pro stazeni z Jaminet.cz
+
+dotnet Jaminet -S TSB -DF -GHPF
+
+Provede se download feedu dodavatele TSB a nasledne se pro vsechny produkty
+pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva az 7 hod.
+
+");
+                Console.ResetColor();
+                return;
+                #endregion
+            }
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -69,8 +83,8 @@ namespace Jaminet
                     case "-PF":
                         if (supplier != null)
                         {
-                            supplier.FilterFeed();
-                            supplier.SaveFeed(false);
+                            supplier.ProcessFeed();
+                            supplier.SaveFeed(true);
                         }
 
                         break;
