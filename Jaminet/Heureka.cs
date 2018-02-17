@@ -18,9 +18,11 @@ namespace Jaminet
     private const string searchMark3 = "<table id=\"product-parameters\"";
     private const string searchMark4 = "</table>";
 
+    // Validace nepovolenych znaku & < > v HTML tagu a pripadne nahrazeni entitou pro XML
     private static readonly Regex htmlAMPValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
     private static readonly Regex htmlGTValidateRegex = new Regex(@"(?<=>.*)>(?=.*<\/)", RegexOptions.Compiled);
     private static readonly Regex htmlLTValidateRegex = new Regex(@"(?<=>.*)<(?=.*<\/)", RegexOptions.Compiled);
+    
     private string htmlPage;
     private Downloader downloader;
 

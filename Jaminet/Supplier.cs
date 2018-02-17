@@ -74,7 +74,12 @@ namespace Jaminet
             Feed = null;
             try
             {
-                Console.WriteLine("Loading feed from file '{0}'\n", FullFileName(feedFileName, "xml"));
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Loading feed from file ");
+                Console.ResetColor();
+                Console.WriteLine("'{0}'", FullFileName(feedFileName, "xml"));
+                Console.WriteLine();
+
                 using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
