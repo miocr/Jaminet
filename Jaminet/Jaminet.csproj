@@ -5,12 +5,16 @@
     <StartupObject>Jaminet.Program</StartupObject>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>anycpu</PlatformTarget>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LangVersion>latest</LangVersion>
+    <LangVersion>Latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
+    <StartArguments> -S TSB -PF</StartArguments>
+    <ExternalConsole>true</ExternalConsole>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Data\**" />
@@ -21,5 +25,10 @@
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.32.1.1107" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
     <PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.gitignore">
+      <Link>.gitignore</Link>
+    </None>
   </ItemGroup>
 </Project>
