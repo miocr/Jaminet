@@ -5,70 +5,59 @@ using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Linq;
-using System.Text;
-using System.Net.Http;
 
 namespace Jaminet
 {
-    public class SupplierSettings
-    {
-        public string SupplierCode { get; set; }
-        public string FeedUrl { get; set; }
-        public string FeedUrlLogin { get; set; }
-        public string FeedUrlPassword { get; set; }
-
-        public List<FeedImportSetting> FeedImportSettings { get; set; }
-
-        public SupplierSettings()
-        {
-            FeedImportSettings = new List<FeedImportSetting>();
-        }
-    }
-
-    public class FeedImportSetting
-    {
-        public string Name { get; set; }
-        public string GoogleDriveFileId { get; set; }
-        public string MimeType { get; set; }
-    }
 
     public class Supplier
     {
-        private const string dataFolder = @"./Data";
-        private GoogleDriveAPI gd;
+        #region Protected Constants
+        protected const string dataFolder = @"./Data";
+        protected const string categoryWLfileName = "categories-WL";
+        protected const string categoryBLfileName = "categories-BL";
+        protected const string productWLfileName = "products-WL";
+        protected const string productBLfileName = "products-BL";
+        protected const string importConfigFileName = "import-config";
+        protected const string feedFileName = "feed-original";
+        protected const string feedProcessedFileName = "feed-processed";
+        protected const string extParametersFileName = "ext-products-parameters";
+        #endregion
 
-        public const string categoryWLfileName = "categories-WL";
-        public const string categoryBLfileName = "categories-BL";
-        public const string productWLfileName = "products-WL";
-        public const string productBLfileName = "products-BL";
-        public const string importConfigFileName = "import-config";
+        #region Protected Properties
 
-        public const string feedFileName = "feed-original";
-        public const string feedProcessedFileName = "feed-processed";
+        protected XElement Feed { get; set; }
+        protected XElement FeedProcessed { get; set; }
 
-        public const string ExtParametersFileName = "ext-products-parameters";
-
+        protected List<string> CategoryWhiteList { get; set; }
+        protected List<string> CategoryBlackList { get; set; }
+        protected List<string> ProductWhiteList { get; set; }
+        protected List<string> ProductBlackList { get; set; }
+        protected ImportConfiguration ImportConfig { get; set; }
         protected SupplierSettings SupplierSettings { get; set; }
 
-        public XElement Feed { get; set; }
-        public XElement FeedProcessed { get; set; }
+        #endregion
 
-        public List<string> CategoryWhiteList { get; set; }
-        public List<string> CategoryBlackList { get; set; }
-        public List<string> ProductWhiteList { get; set; }
-        public List<string> ProductBlackList { get; set; }
-        public ImportConfiguration ImportConfig { get; set; }
+        #region Private Properties
+        private GoogleDriveAPI gd;
+        #endregion
 
         public Supplier()
         {
         }
 
+        /// <summary>
+        /// Download and save feed to file
+        /// </summary>
         public virtual void GetAndSaveFeed()
         {
             Downloader downloader = new Downloader(SupplierSettings.FeedUrlLogin, SupplierSettings.FeedUrlPassword);
             long content = downloader.DownloadFile(SupplierSettings.FeedUrl, FullFileName(feedFileName, "xml"));
         }
 
+        /// <summary>
+        /// Loads feed from file
+        /// </summary>
+        /// <returns>The feed.</returns>
         public virtual XElement LoadFeed()
         {
             Feed = null;
@@ -92,6 +81,10 @@ namespace Jaminet
             return Feed;
         }
 
+        /// <summary>
+        /// Saves feed to file
+        /// </summary>
+        /// <param name="isProcessed">If set to <c>true</c> save to "processed" file</param>
         public virtual void SaveFeed(bool isProcessed = true)
         {
             try
@@ -135,11 +128,11 @@ namespace Jaminet
         public virtual XElement LoadHeurekaProductsParameters()
         {
             XElement extParameters = null;
-            if (File.Exists(FullFileName(ExtParametersFileName, "xml")))
+            if (File.Exists(FullFileName(extParametersFileName, "xml")))
             {
                 try
                 {
-                    using (FileStream fs = new FileStream(FullFileName(ExtParametersFileName, "xml"), FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"), FileMode.Open, FileAccess.Read))
                     {
                         extParameters = XElement.Load(fs);
                     }
@@ -162,7 +155,7 @@ namespace Jaminet
 
             try
             {
-                using (FileStream fs = new FileStream(FullFileName(ExtParametersFileName, "xml"),
+                using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"),
                     FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     outDoc.Save(fs);
@@ -448,14 +441,14 @@ namespace Jaminet
             {
                 using (FileStream fsr = File.OpenRead(FullFileName(importConfigFileName, "xml")))
                 {
-                    #region Oprava BOM (pot�ebuje se pouze pro JSON deserialize)
-                    // JSON mus� b�t UTF-8 !!!
+                    #region Oprava BOM (potrebuje se pouze pro JSON deserialize)
+                    // JSON musi byt UTF-8 !!!
                     // https://cs.wikipedia.org/wiki/Byte_order_mark
                     //if (fsr.ReadByte() == 0xEF)
-                    //    // p�esko�it BOM ! JSON deserializer umi jen UTF-8 bez BOM
+                    //    // preskocit BOM ! JSON deserializer umi jen UTF-8 bez BOM
                     //    fsr.Position = 3; 
                     //else
-                    //    // nen� B0M, �teme od 0
+                    //    // neni B0M, cteme od 0
                     //    fsr.Position = 0;
                     #endregion
 
@@ -514,6 +507,7 @@ namespace Jaminet
 
         private bool ChechProductByWBList(XElement item)
         {
+
             bool enabled = true;
             foreach (XElement itemCategory in item.Descendants("CATEGORY"))
             {
@@ -603,8 +597,8 @@ namespace Jaminet
                             else
                             {
                                 isEnabbled = EvaluateRule(condition.Operator, conditionElement.Value, condition.Value, true);
-                                // Toto pravidlo mus� m�t jednu pom�nku
-                                // TODO - o�et�it a vyvolat vyj�mky pro p��pad v�ce pravidel u stock-amount
+                                // Toto pravidlo musi mit jednu pomdminku
+                                // TODO - ovetrit a vyvolat vyjimky pro pripad vice pravidel u stock-amount
                             }
                         }
 
