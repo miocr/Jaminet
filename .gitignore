@@ -4,6 +4,7 @@
 #Temp
 *.txt
 tsb*.xml
+temp.*
 *.vbs
 .credentials/
 

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -74,7 +74,12 @@ namespace Jaminet
             Feed = null;
             try
             {
-                Console.WriteLine("Loading feed from file '{0}'\n", FullFileName(feedFileName, "xml"));
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Loading feed from file ");
+                Console.ResetColor();
+                Console.WriteLine("'{0}'", FullFileName(feedFileName, "xml"));
+                Console.WriteLine();
+
                 using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
@@ -443,14 +448,14 @@ namespace Jaminet
             {
                 using (FileStream fsr = File.OpenRead(FullFileName(importConfigFileName, "xml")))
                 {
-                    #region Oprava BOM (potøebuje se pouze pro JSON deserialize)
-                    // JSON musí být UTF-8 !!!
+                    #region Oprava BOM (potï¿½ebuje se pouze pro JSON deserialize)
+                    // JSON musï¿½ bï¿½t UTF-8 !!!
                     // https://cs.wikipedia.org/wiki/Byte_order_mark
                     //if (fsr.ReadByte() == 0xEF)
-                    //    // pøeskoèit BOM ! JSON deserializer umi jen UTF-8 bez BOM
+                    //    // pï¿½eskoï¿½it BOM ! JSON deserializer umi jen UTF-8 bez BOM
                     //    fsr.Position = 3; 
                     //else
-                    //    // není B0M, èteme od 0
+                    //    // nenï¿½ B0M, ï¿½teme od 0
                     //    fsr.Position = 0;
                     #endregion
 
@@ -563,17 +568,17 @@ namespace Jaminet
 
 
         /// <summary>
-        /// Zpracuje všechna pravidla konfigurace import pro danou položky
+        /// Zpracuje vï¿½echna pravidla konfigurace import pro danou poloï¿½ky
         /// </summary>
-        /// <param name="item">položka feedu</param>
+        /// <param name="item">poloï¿½ka feedu</param>
         /// <returns>
-        /// Pokud jsou pravidla pro zákaz/povolení položky, vrací výsledek podmínek. Pro 
-        /// jiná pravidla vrací true jako default.
+        /// Pokud jsou pravidla pro zï¿½kaz/povolenï¿½ poloï¿½ky, vracï¿½ vï¿½sledek podmï¿½nek. Pro 
+        /// jinï¿½ pravidla vracï¿½ true jako default.
         /// </returns>
         private bool ProcessItemByRules(XElement item)
         {
             // nastavuje se pouze pro pravdila typu enable/disable item
-            // pro ostatní pravidla (napø.zmìna hodnoty) je vždy true 
+            // pro ostatnï¿½ pravidla (napï¿½.zmï¿½na hodnoty) je vï¿½dy true 
             bool isEnabbled = true;
 
             foreach (Rule rule in ImportConfig.Rules)
@@ -598,8 +603,8 @@ namespace Jaminet
                             else
                             {
                                 isEnabbled = EvaluateRule(condition.Operator, conditionElement.Value, condition.Value, true);
-                                // Toto pravidlo musí mít jednu pomínku
-                                // TODO - ošetøit a vyvolat vyjímky pro pøípad více pravidel u stock-amount
+                                // Toto pravidlo musï¿½ mï¿½t jednu pomï¿½nku
+                                // TODO - oï¿½etï¿½it a vyvolat vyjï¿½mky pro pï¿½ï¿½pad vï¿½ce pravidel u stock-amount
                             }
                         }
 
@@ -685,12 +690,12 @@ namespace Jaminet
         }
 
         /// <summary>
-        /// Metoda prorovná hodnoty 1/2, podle operátoru urèí, zda se porovnají jako èísla, nebo text
+        /// Metoda prorovnï¿½ hodnoty 1/2, podle operï¿½toru urï¿½ï¿½, zda se porovnajï¿½ jako ï¿½ï¿½sla, nebo text
         /// </summary>
-        /// <param name="conditionOperator">Typ operátoru (<, >, =, !=, equals, contains, startwith, endwith)</param>
+        /// <param name="conditionOperator">Typ operï¿½toru (<, >, =, !=, equals, contains, startwith, endwith)</param>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
-        /// <param name="unresolved">Výsledek, pokud se nepodaøí porovnat</param>
+        /// <param name="unresolved">Vï¿½sledek, pokud se nepodaï¿½ï¿½ porovnat</param>
         /// <returns></returns>
         private bool EvaluateRule(string conditionOperator, string value1, string value2, bool unresolved)
         {
@@ -717,12 +722,12 @@ namespace Jaminet
         }
 
         /// <summary>
-        /// Metoda prorovná textové hodnoty 1/2 jako èísla typu decimal 
+        /// Metoda prorovnï¿½ textovï¿½ hodnoty 1/2 jako ï¿½ï¿½sla typu decimal 
         /// </summary>
-        /// <param name="conditionOperator">Typ operátoru (<, >, =, !=)</param>
+        /// <param name="conditionOperator">Typ operï¿½toru (<, >, =, !=)</param>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
-        /// <param name="unresolved">Výsledek, pokud se nepodaøí provonat</param>
+        /// <param name="unresolved">Vï¿½sledek, pokud se nepodaï¿½ï¿½ provonat</param>
         /// <returns></returns>
         private bool EvaluateNumericRule(string conditionOperator, string value1, string value2, bool unresolved)
         {
@@ -754,12 +759,12 @@ namespace Jaminet
         }
 
         /// <summary>
-        /// Metoda prorovná textové hodnoty 1/2 jako typ text 
+        /// Metoda prorovnï¿½ textovï¿½ hodnoty 1/2 jako typ text 
         /// </summary>
-        /// <param name="conditionOperator">Typ operátoru (equals, contains, startwith, endwith)</param>
+        /// <param name="conditionOperator">Typ operï¿½toru (equals, contains, startwith, endwith)</param>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
-        /// <param name="unresolved">Výsledek, pokud se nepodaøí porovnat</param>
+        /// <param name="unresolved">Vï¿½sledek, pokud se nepodaï¿½ï¿½ porovnat</param>
         /// <returns></returns>
         private bool EvaluateTextRule(string conditionOperator, string value1, string value2, bool unresolved)
         {
@@ -786,7 +791,7 @@ namespace Jaminet
         }
 
         /// <summary>
-        /// Pøevede text na desetinné èíslo bez ohledu na typ oddìlovaèe (.,)
+        /// Pï¿½evede text na desetinnï¿½ ï¿½ï¿½slo bez ohledu na typ oddï¿½lovaï¿½e (.,)
         /// </summary>
         /// <param name="svalue"></param>
         /// <returns></returns>
@@ -818,7 +823,7 @@ namespace Jaminet
             {
                 Element = "SHOP/SHOPITEM/CATEGORIES/CATEGORY",
                 Operator = "Contains",
-                Value = "Spotøební materiál &gt; Papír",
+                Value = "Spotï¿½ebnï¿½ materiï¿½l &gt; Papï¿½r",
                 NextCondition = null
             };
 
