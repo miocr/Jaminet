@@ -5,12 +5,15 @@ using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Linq;
+using log4net;
 
 namespace Jaminet
 {
 
     public class Supplier
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Supplier));
+
         #region Protected Constants
         protected const string dataFolder = @"./Data";
         protected const string categoryWLfileName = "categories-WL";
@@ -43,6 +46,7 @@ namespace Jaminet
 
         public Supplier()
         {
+            log.Info("Supplier created");
         }
 
         /// <summary>
