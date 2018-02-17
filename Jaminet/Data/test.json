@@ -1,1 +1,0 @@
-{"version":"1.0","rules":[{"operation":null,"element":"element","newValue":"100","conditions":[{"element":"element","operator":"==","value":"5","nextCondition":null}]}]}
