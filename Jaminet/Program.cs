@@ -21,7 +21,7 @@ namespace Jaminet
         {
             Supplier supplier = null;
             XElement extParams = null;
-            if (args.Length == 0 || args[0] == "-?")
+            if (args.Length == 0 || args[0] != "-S" || args[0] == "-?" || args[0] == "-help")
             {
                 #region Help
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -43,13 +43,13 @@ Priklady:
 dotnet Jaminet -S TSB -DF -PF -MEP 
 
 Provede se download feedu dodavatele TSB, feed se zpracuje podle pravidel, 
-pripoji se parametry produktu ziskane z externiho zdroje a vysledny feed se 
-ulozi na disk pro stazeni z Jaminet.cz
+pripoji se parametry produktu ziskane z externiho zdroje (pokud jsou pripravene)
+a vysledny feed se ulozi na disk pro stazeni z Jaminet.cz
 
 dotnet Jaminet -S TSB -DF -GHPF
 
 Provede se download feedu dodavatele TSB a nasledne se pro vsechny produkty
-pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva az 7 hod.
+pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
 
 ");
                 Console.ResetColor();
