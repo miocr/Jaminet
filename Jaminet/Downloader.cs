@@ -3,11 +3,14 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using log4net;
 
 namespace Jaminet
 {
     public class Downloader
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(Heureka));
+
         private HttpClient httpClient;
         private HttpResponseMessage httpResponse;
         private HttpClientHandler httpClientHandler;
@@ -75,6 +78,8 @@ namespace Jaminet
                 Console.WriteLine("Downloading from url '{0}' to '{1}'", url, fileName);
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
+                log.InfoFormat("Downloading from url '{0}' to '{1}'", url, fileName);
+
                 using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 {
                     do
@@ -104,6 +109,9 @@ namespace Jaminet
             
             Console.WriteLine("\nDownload finished ({0} Bytes)", totalRead);
             Console.ResetColor();
+
+            log.InfoFormat("Downloaded {0} bytes from url '{1}' to '{2}'", 
+                           totalRead, url, fileName);
 
             return totalRead;
         }

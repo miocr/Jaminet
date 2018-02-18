@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using log4net;
+
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
@@ -17,6 +19,8 @@ namespace Jaminet
 {
     class GoogleDriveAPI
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(GoogleDriveAPI));
+
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/drive-dotnet-quickstart.json
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
@@ -37,6 +41,9 @@ namespace Jaminet
                 Console.WriteLine("Downloading GoogleDrive fileId '{0}' to '{1}'", fileId, fileName);
                 FilesResource.ExportRequest request = service.Files.Export(fileId, mimeType);
                 request.Download(fs);
+
+                log.InfoFormat("Downloaded fileId '{0}' to '{1}' from GoogleDrive",fileId, fileName);
+
             }
         }
 

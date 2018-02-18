@@ -17,13 +17,9 @@ namespace Jaminet
         {
             ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+            log.InfoFormat("Starting application with args{0}", args.ToString());
 
-            log.Info("Entering application.");
-            log.Error("Some error.");
-            log.Debug("Some debug.");
-            log.Fatal("Some fatal.");
-
-            //ProcessCommandLine(args);
+            ProcessCommandLine(args);
             //Console.WriteLine("Press any key...");
             //Console.Read();
         }
