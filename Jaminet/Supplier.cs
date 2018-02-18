@@ -7,6 +7,8 @@ using System.Xml.XPath;
 using System.Linq;
 using log4net;
 
+
+
 namespace Jaminet
 {
 
@@ -24,6 +26,9 @@ namespace Jaminet
         protected const string feedFileName = "feed-original";
         protected const string feedProcessedFileName = "feed-processed";
         protected const string extParametersFileName = "ext-products-parameters";
+
+        StringComparison scomp = StringComparison.CurrentCulture;
+
         #endregion
 
         #region Protected Properties
@@ -505,6 +510,8 @@ namespace Jaminet
                 case productWLfileName:
                     ProductWhiteList = list;
                     break;
+                default:
+                    break;
             }
 
         }
@@ -690,7 +697,7 @@ namespace Jaminet
         /// <summary>
         /// Metoda prorovn� hodnoty 1/2, podle oper�toru ur��, zda se porovnaj� jako ��sla, nebo text
         /// </summary>
-        /// <param name="conditionOperator">Typ oper�toru (<, >, =, !=, equals, contains, startwith, endwith)</param>
+        /// <param name="conditionOperator">"Typ operatoru vetsi, mmensi, == !=, equals, contains, startwith, endwith)"</param>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
         /// <param name="unresolved">V�sledek, pokud se nepoda�� porovnat</param>
@@ -722,7 +729,7 @@ namespace Jaminet
         /// <summary>
         /// Metoda prorovn� textov� hodnoty 1/2 jako ��sla typu decimal 
         /// </summary>
-        /// <param name="conditionOperator">Typ oper�toru (<, >, =, !=)</param>
+        /// <param name="conditionOperator">Typ operatoru</param>
         /// <param name="value1"></param>
         /// <param name="value2"></param>
         /// <param name="unresolved">V�sledek, pokud se nepoda�� provonat</param>
@@ -777,10 +784,10 @@ namespace Jaminet
                     result = value1.Contains(value2);
                     break;
                 case "startwith":
-                    result = value1.StartsWith(value2);
+                    result = value1.StartsWith(value2, scomp);
                     break;
                 case "endwith":
-                    result = value1.EndsWith(value2);
+                    result = value1.EndsWith(value2, scomp);
                     break;
                 default:
                     break;

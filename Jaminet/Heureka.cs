@@ -21,6 +21,8 @@ namespace Jaminet
         private const string searchMark3 = "<table id=\"product-parameters\"";
         private const string searchMark4 = "</table>";
 
+        StringComparison scomp = StringComparison.CurrentCulture;
+
         // Validace nepovolenych znaku & < > v HTML tagu a pripadne nahrazeni entitou pro XML
         private static readonly Regex htmlAMPValidateRegex = new Regex(@"(?<=>.*)&(?=.*<\/)", RegexOptions.Compiled);
         private static readonly Regex htmlGTValidateRegex = new Regex(@"(?<=>.*)>(?=.*<\/)", RegexOptions.Compiled);
@@ -181,7 +183,7 @@ namespace Jaminet
                 int searchPos1 = htmlPage.IndexOf(searchMark1, 0, StringComparison.OrdinalIgnoreCase);
                 if (searchPos1 > 0)
                 {
-                    produktSpecificationUrl = RelevantPairedProductProductUrl(htmlPage, producer);
+                    produktSpecificationUrl = RelevantPairedProductProductUrl(producer);
                     if (produktSpecificationUrl != null)
                     {
                         htmlPage = downloader.GetPage(produktSpecificationUrl);
@@ -200,7 +202,7 @@ namespace Jaminet
             return result;
         }
 
-        private string RelevantPairedProductProductUrl(string htmlPage, string producer)
+        private string RelevantPairedProductProductUrl(string producer)
         {
             int maxRelevantSearchs = 10;
             bool relevantProducerFound = false;
@@ -218,14 +220,14 @@ namespace Jaminet
                 {
                     offset = searchPos1 + 1;
                     pairedCounter++;
-                    int searchPos2 = htmlPage.IndexOf(searchMark2, searchPos1);
+                    int searchPos2 = htmlPage.IndexOf(searchMark2, searchPos1, scomp);
                     if (searchPos2 > 0)
                     {
-                        int searchPos2E = htmlPage.IndexOf("\"", searchPos2 + 10);
+                        int searchPos2E = htmlPage.IndexOf("\"", searchPos2 + 10, scomp);
                         if (searchPos2E > 0)
                         {
                             hrProduktUrl = htmlPage.Substring(searchPos2 + 9, (searchPos2E - searchPos2 - 9));
-                            if (hrProduktUrl.IndexOf(producer, 0) > 0)
+                            if (hrProduktUrl.IndexOf(producer, 0,scomp) > 0)
                             {
                                 relevantProducerFound = true;
                                 break;
@@ -275,7 +277,9 @@ namespace Jaminet
                     //    groupName = th.Value;
                     //    continue;
                     //}
-                    //catch (InvalidOperationException exc) { };
+                    //catch (InvalidOperationException exc) 
+                    //{
+                    //}
 
                     if (!tr.Descendants("td").Any())
                     {
@@ -293,7 +297,10 @@ namespace Jaminet
                         if (paramName == "Výrobce")
                             continue;
                     }
-                    catch (InvalidOperationException) { };
+                    catch (InvalidOperationException)
+                    { 
+                    }
+                        
 
                     try
                     {
@@ -306,12 +313,12 @@ namespace Jaminet
                             {
                                 XElement tdSpanParValue = valueTd.Descendants("span")
                                     .Where(span => span.Attribute("id")
-                                    .Value.StartsWith("param-value")).Single();
+                                           .Value.StartsWith("param-value", scomp)).Single();
                                 paramValue = tdSpanParValue.Value;
 
                                 XElement tdSpanParUnit = valueTd.Descendants("span")
                                     .Where(span => span.Attribute("id")
-                                    .Value.StartsWith("param-unit")).Single();
+                                           .Value.StartsWith("param-unit", scomp)).Single();
                                 paramUnit = tdSpanParUnit.Value;
                             }
                             else
@@ -321,7 +328,9 @@ namespace Jaminet
                             }
                         }
                     }
-                    catch (InvalidOperationException) { };
+                    catch (InvalidOperationException) 
+                    {
+                    }
 
 
                     // Shoptet feed nepodporuje popis parametru
@@ -339,7 +348,9 @@ namespace Jaminet
                     //        }
                     //    }
                     //}
-                    //catch (InvalidOperationException exc) { };
+                    //catch (InvalidOperationException exc)
+                    //{ 
+                    //};
 
                     if (paramName != null && paramValue != null)
                     {

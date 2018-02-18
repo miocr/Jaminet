@@ -11,9 +11,9 @@ namespace Jaminet
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(Heureka));
 
-        private HttpClient httpClient;
-        private HttpResponseMessage httpResponse;
-        private HttpClientHandler httpClientHandler;
+        private HttpClient httpClient = null;
+        private HttpResponseMessage httpResponse =  null;
+        private HttpClientHandler httpClientHandler =null;
 
         public Downloader(string login = null, string password = null)
         {

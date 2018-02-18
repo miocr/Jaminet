@@ -23,7 +23,7 @@ namespace Jaminet
 
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/drive-dotnet-quickstart.json
-        static string[] Scopes = { DriveService.Scope.DriveReadonly };
+        static readonly string[] Scopes = { DriveService.Scope.DriveReadonly };
         static string ApplicationName = "Drive API .NET Quickstart";
         private DriveService service;
 
@@ -50,8 +50,6 @@ namespace Jaminet
         public DriveService CreateService()
         {
             UserCredential credential = null;
-            DriveService service = null;
-
             try
             {
                 using (var stream = new FileStream("client_secret.json", FileMode.Open, FileAccess.Read))
