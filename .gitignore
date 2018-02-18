@@ -6,7 +6,10 @@
 tsb*.xml
 temp.*
 *.vbs
+google-drive-oauth.json
+jaminet.log
 .credentials/
+.credentials/google-drive-oauth.json/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user
 
 
 #VS
@@ -51,5 +54,3 @@ Thumbs.db
 
 # dotCover
 *.dotCover
-Jaminet/.credentials/google-drive-oauth.json/Google.Apis.Auth.OAuth2.Responses.TokenResponse-user
-/Jaminet/jaminet.log
