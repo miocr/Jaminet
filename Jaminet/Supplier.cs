@@ -73,6 +73,8 @@ namespace Jaminet
                 Console.WriteLine("'{0}'", FullFileName(feedFileName, "xml"));
                 Console.WriteLine();
 
+                log.InfoFormat("Loading feed from file:{0}", FullFileName(feedFileName, "xml"));
+
                 using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
@@ -81,6 +83,9 @@ namespace Jaminet
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: {0}", ex.Message);
+
+                log.ErrorFormat("Load Feed Exception {0}",ex.Message);
+
             }
             return Feed;
         }
@@ -144,6 +149,7 @@ namespace Jaminet
                 catch (Exception ex)
                 {
                     Console.WriteLine("LoadHeurekaProductsParameters Exception: {0}", ex.Message);
+                    log.ErrorFormat("LoadHeurekaProductsParameters Exception: {0}", ex.Message);
                 }
             }
             return extParameters;
@@ -168,6 +174,7 @@ namespace Jaminet
             catch (Exception ex)
             {
                 Console.WriteLine("SaveHeurekaProductsParameters Exception: {0}", ex.Message);
+                log.ErrorFormat("SaveHeurekaProductsParameters Exception: {0}", ex.Message);
             }
         }
 
@@ -412,6 +419,7 @@ namespace Jaminet
             catch (Exception ex)
             {
                 Console.WriteLine("XML config serialize exception: {0}", ex.Message);
+                log.ErrorFormat("XML config serialize exception: {0}", ex.Message);
             }
         }
 
@@ -463,6 +471,7 @@ namespace Jaminet
             catch (Exception ex)
             {
                 Console.WriteLine("XML config deserialize exception: {0}", ex.Message);
+                log.ErrorFormat("XML config deserialize exception: {0}", ex.Message);
             }
             return ic;
         }
@@ -489,6 +498,7 @@ namespace Jaminet
             catch (Exception exc)
             {
                 Console.WriteLine("ReadImportConfigurationFromGD Exception:{0}", exc.Message);
+                log.ErrorFormat("ReadImportConfigurationFromGD Exception:{0}", exc.Message);
             }
 
             switch (setting.Name)

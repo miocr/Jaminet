@@ -9,7 +9,7 @@ namespace Jaminet
 {
     public class Downloader
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(Heureka));
+        private static readonly ILog log = LogManager.GetLogger(typeof(Downloader));
 
         private HttpClient httpClient;
         private HttpResponseMessage httpResponse;
