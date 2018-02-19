@@ -1,16 +1,15 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
-using System.Xml.XPath;
 using System.Collections.Generic;
-using System.Text;
+using log4net;
 
 namespace Jaminet
 {
     public class TSBohemia : Supplier
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(TSBohemia));
+
         public TSBohemia() : base()
         {
             SupplierSettings supplierSettings = new SupplierSettings()
