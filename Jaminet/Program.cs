@@ -17,14 +17,12 @@ namespace Jaminet
         {
             ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
             XmlConfigurator.Configure(logRepository, new FileInfo(@".\log4net.config"));
-            log.InfoFormat("Starting application with args{0}", String.Join("",args));
+            log.InfoFormat("Starting application with args: '{0}'", String.Join("",args));
 
             ProcessCommandLine(args);
             Console.WriteLine("Press any key...");
             Console.Read();
-
         }
-
 
         private static void ProcessCommandLine(string[] args)
         {

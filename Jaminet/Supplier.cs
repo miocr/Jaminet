@@ -583,12 +583,12 @@ namespace Jaminet
 
 
         /// <summary>
-        /// Zpracuje v�echna pravidla konfigurace import pro danou polo�ky
+        /// Zpracuje všechna pravidla konfigurace import pro danou položky
         /// </summary>
-        /// <param name="item">polo�ka feedu</param>
+        /// <param name="item">položka feedu</param>
         /// <returns>
-        /// Pokud jsou pravidla pro z�kaz/povolen� polo�ky, vrac� v�sledek podm�nek. Pro 
-        /// jin� pravidla vrac� true jako default.
+        /// Pokud jsou pravidla pro zákaz/povolení položky, vrací výsledek podmínek. Pro 
+        /// jiná pravidla vrací true jako default.
         /// </returns>
         private bool ProcessItemByRules(XElement item)
         {

@@ -1,0 +1,24 @@
+﻿[18.02.18 17:19:19] 'Jaminet.Program': Starting application with argsSystem.String[]
+[18.02.18 17:19:19] 'Jaminet.Supplier': Supplier created
+[18.02.18 17:19:21] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[18.02.18 17:19:21] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[18.02.18 17:19:22] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[18.02.18 17:19:22] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[18.02.18 17:19:23] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[18.02.18 17:19:23] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[18.02.18 18:02:04] 'Jaminet.Program': Starting application with argsSystem.String[]
+[18.02.18 18:02:04] 'Jaminet.Supplier': Supplier created
+[18.02.18 18:02:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[18.02.18 18:02:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[18.02.18 18:02:07] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[18.02.18 18:02:07] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[18.02.18 18:02:08] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[18.02.18 18:02:08] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[18.02.18 18:18:09] 'Jaminet.Program': Starting application with argsSystem.String[]
+[18.02.18 18:18:09] 'Jaminet.Supplier': Supplier created
+[18.02.18 18:18:11] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[18.02.18 18:18:11] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[18.02.18 18:18:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[18.02.18 18:18:13] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[18.02.18 18:18:13] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[18.02.18 18:18:14] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
