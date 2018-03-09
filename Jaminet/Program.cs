@@ -20,8 +20,8 @@ namespace Jaminet
             log.InfoFormat("Starting application with args: '{0}'", String.Join("",args));
 
             ProcessCommandLine(args);
-            //Console.WriteLine("Press any key...");
-            //Console.Read();
+            Console.WriteLine("Press any key...");
+            Console.Read();
         }
 
         private static void ProcessCommandLine(string[] args)
