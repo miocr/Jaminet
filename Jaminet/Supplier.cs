@@ -24,6 +24,7 @@ namespace Jaminet
         protected const string productBLfileName = "products-BL";
         protected const string importConfigFileName = "import-config";
         protected const string feedFileName = "feed-original";
+        protected const string feedUpdateFileName = "feed-original-update";
         protected const string feedProcessedFileName = "feed-processed";
         protected const string extParametersFileName = "ext-products-parameters";
 
@@ -49,6 +50,13 @@ namespace Jaminet
         private GoogleDriveAPI gd;
         #endregion
 
+        public enum FeedType
+        {
+            FullOriginal,
+            UpdateOriginal,
+            Processed
+        }
+
         public Supplier()
         {
             log.Info("Supplier created");
@@ -57,12 +65,19 @@ namespace Jaminet
         /// <summary>
         /// Download and save feed to file
         /// </summary>
-        public virtual void GetAndSaveFeed()
+        public virtual void GetAndSaveFeed(FeedType feedType)
         {
             Downloader downloader = new Downloader(SupplierSettings.FeedUrlLogin, SupplierSettings.FeedUrlPassword);
-            long content = downloader.DownloadFile(SupplierSettings.FeedUrl, FullFileName(feedFileName, "xml"));
-        }
 
+            if (feedType == FeedType.FullOriginal)
+            {
+                long content = downloader.DownloadFile(SupplierSettings.FeedUrl, FullFileName(feedFileName, "xml"));
+            }
+            else if (feedType == FeedType.UpdateOriginal)
+            {
+                long content = downloader.DownloadFile(SupplierSettings.FeedUpdateUrl, FullFileName(feedUpdateFileName, "xml"));
+            }
+        }
         /// <summary>
         /// Loads feed from file
         /// </summary>
@@ -88,9 +103,7 @@ namespace Jaminet
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: {0}", ex.Message);
-
-                log.ErrorFormat("Load Feed Exception {0}",ex.Message);
-
+                log.ErrorFormat("Load Feed Exception {0}", ex.Message);
             }
             return Feed;
         }
@@ -275,6 +288,84 @@ namespace Jaminet
             Console.WriteLine("* disabled items by black lists: {0}", disabledByListsCount);
             Console.WriteLine();
             Console.ResetColor();
+        }
+
+        public virtual void UpdateFeed()
+        {
+            LoadFeed();
+            
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Updating full feed by update feed...");
+
+            try
+            {
+                if (!File.Exists(FullFileName(feedUpdateFileName, "xml")))
+                {
+                    GetAndSaveFeed(FeedType.UpdateOriginal);
+                }
+
+                XElement updateFeed;
+                using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"), FileMode.Open, FileAccess.Read))
+                {
+                    updateFeed = XElement.Load(fs);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception: {0}", ex.Message);
+                log.ErrorFormat("Get/Load Update Feed Exception {0}", ex.Message);
+            }
+
+            FeedProcessed = new XElement("SHOP");
+
+            int enabledCount = 0;
+            int disabledByListsCount = 0;
+            int disabledByRuleCount = 0;
+            int totalCount = 0;
+
+            foreach (XElement origItem in Feed.Descendants("SHOPITEM"))
+            {
+#if DEBUG
+                string itemCode = null;
+                if (origItem.Element("CODE") != null)
+                    itemCode = origItem.Element("CODE").Value;
+#endif
+
+                totalCount++;
+
+                // zpracujeme pravidla 
+                enabled = ProcessItemByRules(origItem);
+
+                // polozku zakazanou nekterym z pravidel uz nemuze povolit ani WhiteList
+                if (enabled == false)
+                {
+                    disabledByRuleCount++;
+                }
+                else
+                {
+                    // polozku NEzakazanou pravidly zpracujeme podle Black/WhiteListu
+                    // mohou ji zakazat
+                    enabled = ChechProductByWBList(origItem);
+                    if (enabled)
+                    {
+                        enabledCount++;
+                        FeedProcessed.Add(origItem);
+                    }
+                    else
+                    {
+                        disabledByListsCount++;
+                    }
+                }
+            }
+            Console.WriteLine("finished !");
+            Console.WriteLine("Items in original feed: {0}", totalCount);
+            Console.WriteLine("Items in processed feed: {0}", enabledCount);
+            Console.WriteLine("* disabled items by rules: {0}", disabledByRuleCount);
+            Console.WriteLine("* disabled items by black lists: {0}", disabledByListsCount);
+            Console.WriteLine();
+            Console.ResetColor();
+
         }
 
         /// <summary>

@@ -13,6 +13,7 @@ namespace Jaminet
     {
         public string SupplierCode { get; set; }
         public string FeedUrl { get; set; }
+        public string FeedUpdateUrl { get; set; }
         public string FeedUrlLogin { get; set; }
         public string FeedUrlPassword { get; set; }
 

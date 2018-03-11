@@ -39,7 +39,8 @@ Pouziti: dotnet Jaminet -S kod akce1 akce2 akce3 ...
 - S kod : povinny prvni parametr, kod je kod dodavatele (napr. 'TSB')
 
 Akce (lze zadat vice, provedeny jsou v poradi zadani):
-- DF    : download a ulozeni feedu dodavatele
+- DFF   : download a ulozeni hlavniho plneho feedu dodavatele
+- DFU   : download a ulozeni aktualizacniho feedu dodavatele (sklad, ceny...)
 - PF    : zpracovani feedu podle pravidel a white/black listu
 - MEP   : pridani parametru produktu ziskanych z ext.zdroje
 - GHPF  : ziskani parametru k vsem produktum ve feedu z Heureka.cz 
@@ -83,9 +84,13 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                             }
                         }
                         break;
-                    case "-DF":
+                    case "-DFF":
                         if (supplier != null)
-                            supplier.GetAndSaveFeed();
+                            supplier.GetAndSaveFeed(Supplier.FeedType.FullOriginal);
+                        break;
+                    case "-DFU":
+                        if (supplier != null)
+                            supplier.GetAndSaveFeed(Supplier.FeedType.UpdateOriginal);
                         break;
                     case "-PF":
                         if (supplier != null)
