@@ -234,6 +234,8 @@ namespace Jaminet
             }
 
             LoadFeed();
+            UpdateFeed();
+
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Processing feed by configuration...");
@@ -293,11 +295,10 @@ namespace Jaminet
         public virtual void UpdateFeed()
         {
             LoadFeed();
-            
-
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Updating full feed by update feed...");
 
+            XElement updateFeed = null;
             try
             {
                 if (!File.Exists(FullFileName(feedUpdateFileName, "xml")))
@@ -305,7 +306,6 @@ namespace Jaminet
                     GetAndSaveFeed(FeedType.UpdateOriginal);
                 }
 
-                XElement updateFeed;
                 using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"), FileMode.Open, FileAccess.Read))
                 {
                     updateFeed = XElement.Load(fs);
@@ -315,54 +315,48 @@ namespace Jaminet
             {
                 Console.WriteLine("Exception: {0}", ex.Message);
                 log.ErrorFormat("Get/Load Update Feed Exception {0}", ex.Message);
+                return;
             }
 
             FeedProcessed = new XElement("SHOP");
 
-            int enabledCount = 0;
-            int disabledByListsCount = 0;
-            int disabledByRuleCount = 0;
-            int totalCount = 0;
 
-            foreach (XElement origItem in Feed.Descendants("SHOPITEM"))
+            XElement fullFeedItem = null;
+
+            foreach (XElement updateFeedItem in updateFeed.Descendants("SHOPITEM"))
             {
-#if DEBUG
-                string itemCode = null;
-                if (origItem.Element("CODE") != null)
-                    itemCode = origItem.Element("CODE").Value;
-#endif
-
-                totalCount++;
-
-                // zpracujeme pravidla 
-                enabled = ProcessItemByRules(origItem);
-
-                // polozku zakazanou nekterym z pravidel uz nemuze povolit ani WhiteList
-                if (enabled == false)
-                {
-                    disabledByRuleCount++;
-                }
+                string updateFeedItemCode = null;
+                if (updateFeedItem.Element("CODE") != null)
+                    updateFeedItemCode = updateFeedItem.Element("CODE").Value;
                 else
+                    continue;
+
+                fullFeedItem = Feed.Descendants("SHOPITEM")
+                    .Where(i => i.Element("CODE").Value == updateFeedItemCode).Single();
+
+                XElement fullElementPrice = fullFeedItem.Element("PRICE");
+                XElement updateElementPrice = updateFeedItem.Element("PRICE");
+                if (fullElementPrice != null && updateElementPrice != null)
                 {
-                    // polozku NEzakazanou pravidly zpracujeme podle Black/WhiteListu
-                    // mohou ji zakazat
-                    enabled = ChechProductByWBList(origItem);
-                    if (enabled)
-                    {
-                        enabledCount++;
-                        FeedProcessed.Add(origItem);
-                    }
-                    else
-                    {
-                        disabledByListsCount++;
-                    }
+                    fullElementPrice.Value = updateElementPrice.Value;
+                }
+
+                fullElement = fullFeedItem.Element("STOCK/AMOUNT");
+                updateElement = updateFeedItem.Element("PRICE");
+                if (fullElement != null && updateElement != null)
+                {
+                    fullElement.Value = updateElement.Value;
+                }
+
+                //fullFeedItem = Feed.XPathSelectElement("//SHOPITEM[./CODE='" + updateFeedItemCode + "']");
+                if (fullFeedItem != null)
+                {
+                    fullFeedItem.
                 }
             }
+
+            // zpracujeme pravidla 
             Console.WriteLine("finished !");
-            Console.WriteLine("Items in original feed: {0}", totalCount);
-            Console.WriteLine("Items in processed feed: {0}", enabledCount);
-            Console.WriteLine("* disabled items by rules: {0}", disabledByRuleCount);
-            Console.WriteLine("* disabled items by black lists: {0}", disabledByListsCount);
             Console.WriteLine();
             Console.ResetColor();
 
@@ -684,7 +678,7 @@ namespace Jaminet
         private bool ProcessItemByRules(XElement item)
         {
             // nastavuje se pouze pro pravdila typu enable/disable item
-            // pro ostatn� pravidla (nap�.zm�na hodnoty) je v�dy true 
+            // pro ostatní pravidla (např.změna hodnoty) je vždy true 
             bool isEnabbled = true;
 
             foreach (Rule rule in ImportConfig.Rules)

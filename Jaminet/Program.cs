@@ -41,7 +41,7 @@ Pouziti: dotnet Jaminet -S kod akce1 akce2 akce3 ...
 Akce (lze zadat vice, provedeny jsou v poradi zadani):
 - DFF   : download a ulozeni hlavniho plneho feedu dodavatele
 - DFU   : download a ulozeni aktualizacniho feedu dodavatele (sklad, ceny...)
-- PF    : zpracovani feedu podle pravidel a white/black listu
+- PF    : zpracovani feedu podle pravidel, white/black listu a aktualizacniho feedu
 - MEP   : pridani parametru produktu ziskanych z ext.zdroje
 - GHPF  : ziskani parametru k vsem produktum ve feedu z Heureka.cz 
 - GHPN  : ziskani parametru k novym produktum ve feedu z Heureka.cz
