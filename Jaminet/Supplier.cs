@@ -17,7 +17,8 @@ namespace Jaminet
         private static readonly ILog log = LogManager.GetLogger(typeof(Supplier));
 
         #region Protected Constants
-        protected const string dataFolder = @"./Data";
+        protected const string dataFolder = @"./data/";
+        protected const string publishFolder = @"./../www/";
         protected const string categoryWLfileName = "categories-WL";
         protected const string categoryBLfileName = "categories-BL";
         protected const string productWLfileName = "products-WL";
@@ -151,6 +152,26 @@ namespace Jaminet
             {
                 Console.WriteLine("SaveFeed Exception: {0}", ex.Message);
             }
+        }
+
+        public void PublishFeed()
+        {
+            try
+            {
+                string publishPathFileName = Path.Combine(publishFolder, String.Concat(SupplierSettings.SupplierCode, "-", feedProcessedFileName, ".xml"));
+                File.Copy(FullFileName(feedProcessedFileName, "xml"),
+                          publishPathFileName, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Publishing Feed Exception: {0}", ex.Message);
+                log.ErrorFormat("Publishing Feed Exception {0}", ex.Message);
+            }
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Processed Feed published to www folder.");
+            Console.WriteLine();
+            Console.ResetColor();
         }
 
         public virtual XElement LoadHeurekaProductsParameters()
@@ -318,7 +339,7 @@ namespace Jaminet
                 {
                     GetAndSaveFeed(FeedType.UpdateOriginal);
                 }
-                
+
                 // Hlavni feed nacteme do pameti
                 LoadFeed();
 
@@ -362,7 +383,7 @@ namespace Jaminet
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Create item CODE:'{0}' update dictionary exception: {1}", updateFeedItemCode, ex.Message);
+                    //Console.WriteLine("Create item CODE:'{0}' update dictionary exception: {1}", updateFeedItemCode, ex.Message);
                     log.ErrorFormat("Create item CODE:'{0}' update dictionary exception: {1}", updateFeedItemCode, ex.Message);
                 }
             }
@@ -371,25 +392,29 @@ namespace Jaminet
             #region Update Feed by update Dicitionaries
             foreach (XElement fullFeedItem in Feed.Descendants("SHOPITEM"))
             {
+
                 try
                 {
                     string fullFeedItemCode = fullFeedItem.Element("CODE")?.Value;
                     if (fullFeedItemCode == null)
                         continue;
 
-                    fullFeedItem.Element("PRICE").Value = priceUpdates[fullFeedItemCode];
-                    fullFeedItem.Element("STOCK").Element("AMOUNT").Value = stockAmountUpdates[fullFeedItemCode];
+                    if (priceUpdates.ContainsKey(fullFeedItemCode))
+                        fullFeedItem.Element("PRICE").Value = priceUpdates[fullFeedItemCode];
+
+                    if (stockAmountUpdates.ContainsKey(fullFeedItemCode))
+                        fullFeedItem.Element("STOCK").Element("AMOUNT").Value = stockAmountUpdates[fullFeedItemCode];
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
+                    //Console.WriteLine("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
                     log.ErrorFormat("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
                 }
             }
             #endregion
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("finished !");
+            Console.WriteLine("finished!");
             Console.WriteLine();
             Console.ResetColor();
             updateFeed = null;
