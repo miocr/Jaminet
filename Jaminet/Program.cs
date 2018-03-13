@@ -20,8 +20,9 @@ namespace Jaminet
             log.InfoFormat("Starting application with args: '{0}'", String.Join("",args));
 
             ProcessCommandLine(args);
-            Console.WriteLine("Press any key...");
-            Console.Read();
+
+            //Console.WriteLine("Press any key...");
+            //Console.Read();
         }
 
         private static void ProcessCommandLine(string[] args)
@@ -41,7 +42,7 @@ Pouziti: dotnet Jaminet -S kod akce1 akce2 akce3 ...
 Akce (lze zadat vice, provedeny jsou v poradi zadani):
 - DFF   : download a ulozeni hlavniho plneho feedu dodavatele
 - DFU   : download a ulozeni aktualizacniho feedu dodavatele (sklad, ceny...)
-- PF    : zpracovani feedu podle pravidel, white/black listu a aktualizacniho feedu
+- PF    : aktualizace feedu a zpracovani pravidel, white/black listu
 - MEP   : pridani parametru produktu ziskanych z ext.zdroje
 - GHPF  : ziskani parametru k vsem produktum ve feedu z Heureka.cz 
 - GHPN  : ziskani parametru k novym produktum ve feedu z Heureka.cz
@@ -95,7 +96,7 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                     case "-PF":
                         if (supplier != null)
                         {
-                            supplier.ProcessFeed();
+                            supplier.ProcessFeed(true);
                             supplier.SaveFeed(true);
                         }
 

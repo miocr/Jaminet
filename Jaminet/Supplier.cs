@@ -78,6 +78,7 @@ namespace Jaminet
                 long content = downloader.DownloadFile(SupplierSettings.FeedUpdateUrl, FullFileName(feedUpdateFileName, "xml"));
             }
         }
+
         /// <summary>
         /// Loads feed from file
         /// </summary>
@@ -224,18 +225,29 @@ namespace Jaminet
             Console.WriteLine();
         }
 
-        public virtual void ProcessFeed()
+        /// <summary>
+        /// Metoda zpracuje hlavni feed. Nejprve provede jeho aktualizaci
+        /// na zaklade aktualizacniho (ceny, sklad) a nasledne aplikuje
+        /// pravidla pro filtrovani polozek a upravy polozek. Zpracovany
+        /// feed 'FeedProcessed' je v pameti.
+        /// </summary>
+        /// <param name="update">
+        /// Pred zpracovanim se provede aktualizace feedu na zaklade 
+        /// stazeni aktualizacniho feedu a jeho zpracovani do hlavniho.
+        /// </param>
+        public virtual void ProcessFeed(bool update)
         {
+            if (update)
+                LoadAndUpdate();
+            else
+                LoadFeed();
+
             if (CategoryBlackList == null || CategoryWhiteList == null ||
                 ProductWhiteList == null || ProductBlackList == null)
             {
                 Console.WriteLine("Error - incomplete configuration.");
                 return;
             }
-
-            LoadFeed();
-            UpdateFeed();
-
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Processing feed by configuration...");
@@ -292,12 +304,13 @@ namespace Jaminet
             Console.ResetColor();
         }
 
-        public virtual void UpdateFeed()
-        {
-            LoadFeed();
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Updating full feed by update feed...");
 
+        /// <summary>
+        /// Metoda nacte do pameti hlavni feed a zaktulizuje ho 
+        /// v pameti podle aktualizacniho feedu
+        /// </summary>
+        public virtual void LoadAndUpdate()
+        {
             XElement updateFeed = null;
             try
             {
@@ -305,6 +318,15 @@ namespace Jaminet
                 {
                     GetAndSaveFeed(FeedType.UpdateOriginal);
                 }
+                
+                // Hlavni feed nacteme do pameti
+                LoadFeed();
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("Loading update feed from file ");
+                Console.ResetColor();
+                Console.WriteLine("'{0}'", FullFileName(feedUpdateFileName, "xml"));
+                Console.WriteLine();
 
                 using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"), FileMode.Open, FileAccess.Read))
                 {
@@ -318,48 +340,59 @@ namespace Jaminet
                 return;
             }
 
-            FeedProcessed = new XElement("SHOP");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Updating full feed by update feed... ");
+            Console.ResetColor();
 
 
-            XElement fullFeedItem = null;
+            #region Create update Dictionaries
+            Dictionary<string, string> priceUpdates = new Dictionary<string, string>();
+            Dictionary<string, string> stockAmountUpdates = new Dictionary<string, string>();
 
+            string updateFeedItemCode = null;
             foreach (XElement updateFeedItem in updateFeed.Descendants("SHOPITEM"))
             {
-                string updateFeedItemCode = null;
-                if (updateFeedItem.Element("CODE") != null)
-                    updateFeedItemCode = updateFeedItem.Element("CODE").Value;
-                else
-                    continue;
-
-                fullFeedItem = Feed.Descendants("SHOPITEM")
-                    .Where(i => i.Element("CODE").Value == updateFeedItemCode).Single();
-
-                XElement fullElementPrice = fullFeedItem.Element("PRICE");
-                XElement updateElementPrice = updateFeedItem.Element("PRICE");
-                if (fullElementPrice != null && updateElementPrice != null)
+                try
                 {
-                    fullElementPrice.Value = updateElementPrice.Value;
+                    updateFeedItemCode = updateFeedItem.Element("CODE")?.Value;
+                    if (updateFeedItemCode == null)
+                        continue;
+                    priceUpdates.Add(updateFeedItemCode, updateFeedItem.Element("PRICE").Value);
+                    stockAmountUpdates.Add(updateFeedItemCode, updateFeedItem.Element("STOCK")?.Element("AMOUNT")?.Value);
                 }
-
-                fullElement = fullFeedItem.Element("STOCK/AMOUNT");
-                updateElement = updateFeedItem.Element("PRICE");
-                if (fullElement != null && updateElement != null)
+                catch (Exception ex)
                 {
-                    fullElement.Value = updateElement.Value;
-                }
-
-                //fullFeedItem = Feed.XPathSelectElement("//SHOPITEM[./CODE='" + updateFeedItemCode + "']");
-                if (fullFeedItem != null)
-                {
-                    fullFeedItem.
+                    Console.WriteLine("Create item CODE:'{0}' update dictionary exception: {1}", updateFeedItemCode, ex.Message);
+                    log.ErrorFormat("Create item CODE:'{0}' update dictionary exception: {1}", updateFeedItemCode, ex.Message);
                 }
             }
+            #endregion
 
-            // zpracujeme pravidla 
+            #region Update Feed by update Dicitionaries
+            foreach (XElement fullFeedItem in Feed.Descendants("SHOPITEM"))
+            {
+                try
+                {
+                    string fullFeedItemCode = fullFeedItem.Element("CODE")?.Value;
+                    if (fullFeedItemCode == null)
+                        continue;
+
+                    fullFeedItem.Element("PRICE").Value = priceUpdates[fullFeedItemCode];
+                    fullFeedItem.Element("STOCK").Element("AMOUNT").Value = stockAmountUpdates[fullFeedItemCode];
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
+                    log.ErrorFormat("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
+                }
+            }
+            #endregion
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("finished !");
             Console.WriteLine();
             Console.ResetColor();
-
+            updateFeed = null;
         }
 
         /// <summary>
