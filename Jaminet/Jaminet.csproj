@@ -9,26 +9,16 @@
 		<PlatformTarget>anycpu</PlatformTarget>
 		<LangVersion>Latest</LangVersion>
 		<NoWarn>1701;1702;1705;RECS0145;RECS0014;</NoWarn>
-		<DefineConstants>TRACE;DEBUG;NETCOREAPP1_1</DefineConstants>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
 		<PlatformTarget>anycpu</PlatformTarget>
 		<LangVersion>Latest</LangVersion>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
-	  <StartAction>Project</StartAction>
-	  <StartArguments>-S -TSB -DF -PF</StartArguments>
-	  <ExternalConsole>true</ExternalConsole>
-	  <ConsolePause>false</ConsolePause>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Google.Apis.Drive.v3" Version="1.32.1.1107" />
 		<PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
 		<PackageReference Include="System.Xml.XPath.XDocument" Version="4.3.0" />
 		<PackageReference Include="log4net" Version="2.0.8" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="jaminet.log" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="..\.gitignore">

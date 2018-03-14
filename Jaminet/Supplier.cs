@@ -97,7 +97,7 @@ namespace Jaminet
 
                 log.InfoFormat("Loading feed from file:{0}", FullFileName(feedFileName, "xml"));
 
-                using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Create))
                 {
                     Feed = XElement.Load(fs);
                 }
@@ -110,34 +110,33 @@ namespace Jaminet
             return Feed;
         }
 
+
         /// <summary>
-        /// Saves feed to file
+        /// Save feed type to file
         /// </summary>
-        /// <param name="isProcessed">If set to <c>true</c> save to "processed" file</param>
-        public virtual void SaveFeed(bool isProcessed = true)
+        public virtual void SaveFeed(FeedType feedType)
         {
             try
             {
-                if (isProcessed)
+                if (feedType == FeedType.Processed)
                 {
                     if (FeedProcessed != null)
                     {
-                        //using (FileStream fs = File.Create(FullFileName(feedProcessedFileName, "xml")))
-                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"), FileMode.Create))
                         {
                             FeedProcessed.Save(fs);
                         }
                     }
                     else
                     {
-                        Console.WriteLine("SaveFeed error - FeedProcessed is empty");
+                        Console.WriteLine("SaveProcessedFeed error - FeedProcessed is empty");
                     }
                 }
-                else
+                else if (feedType == FeedType.FullOriginal)
                 {
                     if (Feed != null)
                     {
-                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"), FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Create))
                         {
                             Feed.Save(fs);
                         }
@@ -156,6 +155,9 @@ namespace Jaminet
 
         public void PublishFeed()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Publishing processed Feed to www folder... ");
+
             try
             {
                 string publishPathFileName = Path.Combine(publishFolder, String.Concat(SupplierSettings.SupplierCode, "-", feedProcessedFileName, ".xml"));
@@ -164,12 +166,13 @@ namespace Jaminet
             }
             catch (Exception ex)
             {
+                Console.WriteLine();
                 Console.WriteLine("Publishing Feed Exception: {0}", ex.Message);
                 log.ErrorFormat("Publishing Feed Exception {0}", ex.Message);
             }
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Processed Feed published to www folder.");
+            Console.WriteLine("done!");
+
             Console.WriteLine();
             Console.ResetColor();
         }
@@ -271,7 +274,7 @@ namespace Jaminet
             }
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write("Processing feed by configuration...");
+            Console.Write("Processing feed by configuration... ");
 
             bool enabled;
 
@@ -284,11 +287,14 @@ namespace Jaminet
 
             foreach (XElement origItem in Feed.Descendants("SHOPITEM"))
             {
-#if DEBUG
-                string itemCode = null;
-                if (origItem.Element("CODE") != null)
-                    itemCode = origItem.Element("CODE").Value;
-#endif
+                //string itemCode = null;
+                //if (origItem.Element("CODE") != null)
+                //{
+                //    itemCode = origItem.Element("CODE").Value;
+                //    if (itemCode == "ts9306722")
+                //    {
+                //    }
+                //}
 
                 totalCount++;
 
@@ -299,6 +305,7 @@ namespace Jaminet
                 if (enabled == false)
                 {
                     disabledByRuleCount++;
+                    continue;
                 }
                 else
                 {
@@ -316,7 +323,7 @@ namespace Jaminet
                     }
                 }
             }
-            Console.WriteLine("finished !");
+            Console.WriteLine("done!");
             Console.WriteLine("Items in original feed: {0}", totalCount);
             Console.WriteLine("Items in processed feed: {0}", enabledCount);
             Console.WriteLine("* disabled items by rules: {0}", disabledByRuleCount);
@@ -414,7 +421,7 @@ namespace Jaminet
             #endregion
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("finished!");
+            Console.WriteLine("done!");
             Console.WriteLine();
             Console.ResetColor();
             updateFeed = null;
@@ -741,9 +748,16 @@ namespace Jaminet
 
             foreach (Rule rule in ImportConfig.Rules)
             {
+                // Pokud uz je z predchoziho pravidla polozka zakazana,
+                // nebudeme uz delat ani dalsi pravidla, protoze
+                // zatim nejsou definovana pravidla, ktera by polozku
+                // mohla zase povolit...
+                if (isEnabbled == false)
+                    break;
+
                 switch (rule.RuleType.ToLower())
                 {
-                    case "enable-disable-item":
+                    case "disable-item":
 
                         if (rule.Conditions == null)
                             break;

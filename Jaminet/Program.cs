@@ -47,6 +47,7 @@ Akce (lze zadat vice, provedeny jsou v poradi zadani):
 - MEP   : pridani parametru produktu ziskanych z ext.zdroje
 - GHPF  : ziskani parametru k vsem produktum ve feedu z Heureka.cz 
 - GHPN  : ziskani parametru k novym produktum ve feedu z Heureka.cz
+- ALL   : provede postupne DFF,DFU,UPF,PBF
 
 Priklady:
 
@@ -66,6 +67,8 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                 return;
                 #endregion
             }
+
+            Console.Clear();
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -98,7 +101,7 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                         if (supplier != null)
                         {
                             supplier.ProcessFeed(true);
-                            supplier.SaveFeed(true);
+                            supplier.SaveFeed(Supplier.FeedType.Processed);
                         }
                         break;
                     case "-PBF":
@@ -109,7 +112,7 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                         {
                             extParams = supplier.LoadHeurekaProductsParameters();
                             supplier.MergeFeedWithExtParameters(extParams);
-                            supplier.SaveFeed(true);
+                            supplier.SaveFeed(Supplier.FeedType.Processed);
                         }
                         break;
                     case "-GHPF":
@@ -128,7 +131,16 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                                 supplier.SaveHeurekaProductsParameters(extParams);
                         }
                         break;
-
+                    case "-ALL":
+                        if (supplier != null)
+                        {
+                            supplier.GetAndSaveFeed(Supplier.FeedType.FullOriginal);
+                            supplier.GetAndSaveFeed(Supplier.FeedType.UpdateOriginal);
+                            supplier.ProcessFeed(true);
+                            supplier.SaveFeed(Supplier.FeedType.Processed);
+                            supplier.PublishFeed();
+                        }
+                        break;
                     default:
                         break;
                 }
