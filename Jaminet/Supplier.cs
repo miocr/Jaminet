@@ -97,7 +97,8 @@ namespace Jaminet
 
                 log.InfoFormat("Loading feed from file:{0}", FullFileName(feedFileName, "xml"));
 
-                using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Create))
+                using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), 
+                    FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
                 }
@@ -122,7 +123,8 @@ namespace Jaminet
                 {
                     if (FeedProcessed != null)
                     {
-                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"), FileMode.Create))
+                        using (FileStream fs = new FileStream(FullFileName(feedProcessedFileName, "xml"),
+                            FileMode.Create, FileAccess.Write))
                         {
                             FeedProcessed.Save(fs);
                         }
@@ -136,7 +138,8 @@ namespace Jaminet
                 {
                     if (Feed != null)
                     {
-                        using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), FileMode.Create))
+                        using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), 
+                            FileMode.Create, FileAccess.Write))
                         {
                             Feed.Save(fs);
                         }
@@ -184,7 +187,8 @@ namespace Jaminet
             {
                 try
                 {
-                    using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"), FileMode.Open, FileAccess.Read))
+                    using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"), 
+                        FileMode.Open, FileAccess.Read))
                     {
                         extParameters = XElement.Load(fs);
                     }
@@ -209,7 +213,7 @@ namespace Jaminet
             try
             {
                 using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"),
-                    FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    FileMode.Create, FileAccess.Write))
                 {
                     outDoc.Save(fs);
                 }
@@ -356,7 +360,8 @@ namespace Jaminet
                 Console.WriteLine("'{0}'", FullFileName(feedUpdateFileName, "xml"));
                 Console.WriteLine();
 
-                using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"), FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"), 
+                    FileMode.Open, FileAccess.Read))
                 {
                     updateFeed = XElement.Load(fs);
                 }

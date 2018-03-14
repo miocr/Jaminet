@@ -80,7 +80,7 @@ namespace Jaminet
 
                 log.InfoFormat("Downloading from url '{0}' to '{1}'", url, fileName);
 
-                using (FileStream fs = new FileStream(fileName, FileMode.Create))
+                using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite))
                 {
                     do
                     {

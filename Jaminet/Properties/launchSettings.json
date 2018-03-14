@@ -2,7 +2,7 @@
   "profiles": {
     "Jaminet": {
       "commandName": "Project",
-      "commandLineArgs": "-S TSB -PBF"
+      "commandLineArgs": "-S TSB -ALL"
     }
   }
 }

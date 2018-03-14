@@ -1,0 +1,374 @@
+[13.03.18 18:14:59] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 18:15:00] 'Jaminet.Supplier': Supplier created
+[13.03.18 18:15:10] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 18:15:11] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 18:15:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 18:15:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 18:15:13] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 18:15:16] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:16:02] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:27:26] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 18:27:26] 'Jaminet.Supplier': Supplier created
+[13.03.18 18:27:28] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 18:27:29] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 18:27:30] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 18:27:30] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 18:27:31] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 18:27:31] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:27:57] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:32:26] 'Jaminet.Supplier': Update feed item CODE:ts7707131R exception:Sequence contains no elements
+[13.03.18 18:32:42] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 18:32:42] 'Jaminet.Supplier': Supplier created
+[13.03.18 18:32:44] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 18:32:45] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 18:32:45] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 18:32:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 18:32:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 18:32:46] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:33:31] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:37:11] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 18:37:11] 'Jaminet.Supplier': Supplier created
+[13.03.18 18:37:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 18:37:13] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 18:37:13] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 18:37:14] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 18:37:14] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 18:37:14] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:37:18] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:40:57] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 18:40:57] 'Jaminet.Supplier': Supplier created
+[13.03.18 18:40:59] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 18:41:00] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 18:41:00] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 18:41:01] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 18:41:01] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 18:41:02] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 18:41:05] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:29:24] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 19:29:24] 'Jaminet.Supplier': Supplier created
+[13.03.18 19:29:26] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 19:29:26] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 19:29:27] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 19:29:27] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 19:29:28] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 19:29:28] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:29:32] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:39:53] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 19:39:53] 'Jaminet.Supplier': Supplier created
+[13.03.18 19:39:55] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 19:39:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 19:39:57] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 19:39:57] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 19:39:58] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 19:39:58] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:40:02] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:41:54] 'Jaminet.Supplier': Update feed item CODE:ž exception:Sequence contains no elements
+[13.03.18 19:42:09] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 19:42:09] 'Jaminet.Supplier': Supplier created
+[13.03.18 19:42:11] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 19:42:11] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 19:42:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 19:42:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 19:42:13] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 19:42:13] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:42:20] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:42:53] 'Jaminet.Supplier': Update feed item CODE:ts7707131R exception:Sequence contains no elements
+[13.03.18 19:44:37] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 19:44:37] 'Jaminet.Supplier': Supplier created
+[13.03.18 19:44:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 19:44:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 19:44:40] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 19:44:40] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 19:44:41] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 19:44:41] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:44:43] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:47:22] 'Jaminet.Supplier': Update feed item CODE:ts7707131R exception:Sequence contains no elements
+[13.03.18 19:49:47] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 19:49:47] 'Jaminet.Supplier': Supplier created
+[13.03.18 19:49:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 19:49:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 19:49:50] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 19:49:51] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 19:49:51] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 19:49:51] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:49:54] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:59:30] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 19:59:30] 'Jaminet.Supplier': Supplier created
+[13.03.18 19:59:31] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 19:59:32] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 19:59:32] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 19:59:33] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 19:59:34] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 19:59:34] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 19:59:38] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:02:32] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 20:02:32] 'Jaminet.Supplier': Supplier created
+[13.03.18 20:02:33] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 20:02:34] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 20:02:34] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 20:02:35] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 20:02:35] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 20:02:36] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:02:38] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:08:21] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 20:08:21] 'Jaminet.Supplier': Supplier created
+[13.03.18 20:08:22] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 20:08:23] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 20:08:23] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 20:08:24] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 20:08:24] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 20:08:25] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:08:27] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:09:44] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 20:09:44] 'Jaminet.Supplier': Supplier created
+[13.03.18 20:09:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 20:09:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 20:09:47] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 20:09:47] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 20:09:48] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 20:09:48] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:09:51] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:11:49] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 20:11:49] 'Jaminet.Supplier': Supplier created
+[13.03.18 20:11:50] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 20:11:51] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 20:11:51] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 20:11:52] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 20:11:52] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 20:11:52] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:11:55] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:20:54] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 20:20:54] 'Jaminet.Supplier': Supplier created
+[13.03.18 20:20:55] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 20:20:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 20:20:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 20:20:57] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 20:20:57] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 20:20:58] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:21:02] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 20:49:43] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 20:49:43] 'Jaminet.Supplier': Supplier created
+[13.03.18 20:49:45] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 20:49:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 20:49:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 20:49:47] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 20:49:47] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 21:35:38] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 21:39:35] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 21:39:35] 'Jaminet.Supplier': Supplier created
+[13.03.18 21:39:40] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 21:39:50] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 21:39:50] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 21:39:51] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 21:39:52] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 21:39:52] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 21:41:58] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 21:41:58] 'Jaminet.Supplier': Supplier created
+[13.03.18 21:42:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 21:42:07] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 21:42:08] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 21:42:10] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 21:42:12] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 21:42:12] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 21:42:43] 'Jaminet.Program': Starting application with args: '-STSB-DFU-PF'
+[13.03.18 21:42:43] 'Jaminet.Supplier': Supplier created
+[13.03.18 21:42:45] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 21:42:46] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 21:42:48] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 21:42:48] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 21:42:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 21:42:59] 'Jaminet.Downloader': Downloading from url 'https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml' to './Data\TSB-feed-original-update.xml'
+[13.03.18 21:45:12] 'Jaminet.Downloader': Downloaded 12230120 bytes from url 'https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml' to './Data\TSB-feed-original-update.xml'
+[13.03.18 21:45:12] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:45:15] 'Jaminet.Supplier': Update item CODE:'ts8988943' exception: The given key was not present in the dictionary.
+[13.03.18 21:52:23] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 21:52:23] 'Jaminet.Supplier': Supplier created
+[13.03.18 21:52:25] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 21:52:25] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 21:52:26] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 21:52:26] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 21:52:27] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 21:52:27] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 22:09:00] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[13.03.18 22:09:00] 'Jaminet.Supplier': Supplier created
+[13.03.18 22:09:03] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 22:09:03] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 22:09:04] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 22:09:05] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 22:09:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 22:09:06] 'Jaminet.Supplier': Loading feed from file:./Data\TSB-feed-original.xml
+[13.03.18 22:35:29] 'Jaminet.Program': Starting application with args: '-STSB-PBF'
+[13.03.18 22:35:30] 'Jaminet.Supplier': Supplier created
+[13.03.18 22:35:31] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data\TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 22:35:32] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data\TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 22:35:33] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data\TSB-products-BL.txt' from GoogleDrive
+[13.03.18 22:35:34] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data\TSB-products-WL.txt' from GoogleDrive
+[13.03.18 22:35:34] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data\TSB-import-config.xml' from GoogleDrive
+[13.03.18 22:38:35] 'Jaminet.Program': Starting application with args: '-STSB-PBF'
+[13.03.18 22:38:35] 'Jaminet.Supplier': Supplier created
+[13.03.18 22:38:37] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data/TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 22:38:37] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data/TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 22:38:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data/TSB-products-BL.txt' from GoogleDrive
+[13.03.18 22:38:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data/TSB-products-WL.txt' from GoogleDrive
+[13.03.18 22:38:40] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data/TSB-import-config.xml' from GoogleDrive
+[13.03.18 22:41:46] 'Jaminet.Program': Starting application with args: '-STSB-PBF'
+[13.03.18 22:41:46] 'Jaminet.Supplier': Supplier created
+[13.03.18 22:41:48] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './Data/TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 22:41:48] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './Data/TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 22:41:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './Data/TSB-products-BL.txt' from GoogleDrive
+[13.03.18 22:41:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './Data/TSB-products-WL.txt' from GoogleDrive
+[13.03.18 22:41:50] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './Data/TSB-import-config.xml' from GoogleDrive
+[13.03.18 22:52:14] 'Jaminet.Program': Starting application with args: '-STSB-PBF'
+[13.03.18 22:52:14] 'Jaminet.Supplier': Supplier created
+[13.03.18 22:52:16] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[13.03.18 22:52:17] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[13.03.18 22:52:17] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[13.03.18 22:52:17] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[13.03.18 22:52:18] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
