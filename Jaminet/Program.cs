@@ -13,6 +13,7 @@ namespace Jaminet
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
+
         static void Main(string[] args)
         {
             ILoggerRepository logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
