@@ -97,7 +97,7 @@ namespace Jaminet
 
                 log.InfoFormat("Loading feed from file:{0}", FullFileName(feedFileName, "xml"));
 
-                using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), 
+                using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"),
                     FileMode.Open, FileAccess.Read))
                 {
                     Feed = XElement.Load(fs);
@@ -138,7 +138,7 @@ namespace Jaminet
                 {
                     if (Feed != null)
                     {
-                        using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"), 
+                        using (FileStream fs = new FileStream(FullFileName(feedFileName, "xml"),
                             FileMode.Create, FileAccess.Write))
                         {
                             Feed.Save(fs);
@@ -187,7 +187,7 @@ namespace Jaminet
             {
                 try
                 {
-                    using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"), 
+                    using (FileStream fs = new FileStream(FullFileName(extParametersFileName, "xml"),
                         FileMode.Open, FileAccess.Read))
                     {
                         extParameters = XElement.Load(fs);
@@ -360,7 +360,7 @@ namespace Jaminet
                 Console.WriteLine("'{0}'", FullFileName(feedUpdateFileName, "xml"));
                 Console.WriteLine();
 
-                using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"), 
+                using (FileStream fs = new FileStream(FullFileName(feedUpdateFileName, "xml"),
                     FileMode.Open, FileAccess.Read))
                 {
                     updateFeed = XElement.Load(fs);
@@ -798,16 +798,30 @@ namespace Jaminet
                         for (int i = 0; i < rule.Conditions.Count; i++)
                         {
                             RuleCondition condition = rule.Conditions[i];
-                            XElement conditionElement = item.XPathSelectElement(condition.Element);
-                            if (conditionElement == null)
+                            //XElement conditionElement = item.XPathSelectElement(condition.Element);
+                            IEnumerable<XElement> conditionElements = item.XPathSelectElements(condition.Element);
+
+                            if (conditionElements == null || conditionElements.Count() == 0)
                             {
-                                // Pokud polozka nema element potrebny k vyhodoceni podmky
-                                // povzaujeme pro tento typ pravidla za FALSE
+                                // Pokud polozka nema element potrebny k vyhodoceni podminky
+                                // povazujeme tento typ pravidla za FALSE
                                 tmpCondResult = false;
                             }
                             else
                             {
-                                tmpCondResult = EvaluateRule(condition.Operator, conditionElement.Value, condition.Value, false);
+                                foreach (XElement conditionElement in conditionElements)
+                                {
+                                    tmpCondResult = EvaluateRule(condition.Operator,
+                                        conditionElement.Value, condition.Value, false);
+                                    if (tmpCondResult)
+                                    {
+                                        // prvni splnena podminka postacuje, je to jako OR
+                                        // takze uz dalsi elementy netestujeme 
+                                        // a tmpCondResult = true;
+                                        break;
+                                    }
+                                }
+
                             }
 
                             if (previousConditionOperator != null)
@@ -817,13 +831,13 @@ namespace Jaminet
                                 {
                                     case null:
                                         // prvni podminka, ale existuje dalsi
-                                        tmpAllCondsResult = isEnabbled;
+                                        tmpAllCondsResult = tmpCondResult;
                                         break;
                                     case "and":
-                                        tmpAllCondsResult = tmpAllCondsResult && isEnabbled;
+                                        tmpAllCondsResult = tmpAllCondsResult && tmpCondResult;
                                         break;
                                     case "or":
-                                        tmpAllCondsResult = tmpAllCondsResult || isEnabbled;
+                                        tmpAllCondsResult = tmpAllCondsResult || tmpCondResult;
                                         break;
                                     default:
                                         throw new Exception(

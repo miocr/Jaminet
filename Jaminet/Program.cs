@@ -104,6 +104,13 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                             supplier.SaveFeed(Supplier.FeedType.Processed);
                         }
                         break;
+                    case "-PF":
+                        if (supplier != null)
+                        {
+                            supplier.ProcessFeed(false);
+                            supplier.SaveFeed(Supplier.FeedType.Processed);
+                        }
+                        break;
                     case "-PBF":
                         supplier.PublishFeed();
                         break;
