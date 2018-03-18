@@ -334,6 +334,9 @@ namespace Jaminet
             Console.WriteLine("* disabled items by black lists: {0}", disabledByListsCount);
             Console.WriteLine();
             Console.ResetColor();
+
+            log.InfoFormat("Feed processed. original items:{0}, passed:{1}, disabled by rules:{2}, dissabled by lists:{3}",
+                totalCount, enabledCount, disabledByRuleCount, disabledByListsCount);
         }
 
 
@@ -380,9 +383,11 @@ namespace Jaminet
 
             #region Create update Dictionaries
             Dictionary<string, string> priceUpdates = new Dictionary<string, string>();
+            Dictionary<string, string> standardPriceUpdates = new Dictionary<string, string>();
             Dictionary<string, string> stockAmountUpdates = new Dictionary<string, string>();
 
             string updateFeedItemCode = null;
+            int updateItemsCount = 0;
             foreach (XElement updateFeedItem in updateFeed.Descendants("SHOPITEM"))
             {
                 try
@@ -391,6 +396,7 @@ namespace Jaminet
                     if (updateFeedItemCode == null)
                         continue;
                     priceUpdates.Add(updateFeedItemCode, updateFeedItem.Element("PRICE").Value);
+                    standardPriceUpdates.Add(updateFeedItemCode, updateFeedItem.Element("STANDARD_PRICE").Value);
                     stockAmountUpdates.Add(updateFeedItemCode, updateFeedItem.Element("STOCK")?.Element("AMOUNT")?.Value);
                 }
                 catch (Exception ex)
@@ -414,6 +420,9 @@ namespace Jaminet
                     if (priceUpdates.ContainsKey(fullFeedItemCode))
                         fullFeedItem.Element("PRICE").Value = priceUpdates[fullFeedItemCode];
 
+                    if (priceUpdates.ContainsKey(fullFeedItemCode))
+                        fullFeedItem.Element("STANDARD_PRICE").Value = standardPriceUpdates[fullFeedItemCode];
+
                     if (stockAmountUpdates.ContainsKey(fullFeedItemCode))
                         fullFeedItem.Element("STOCK").Element("AMOUNT").Value = stockAmountUpdates[fullFeedItemCode];
                 }
@@ -422,13 +431,18 @@ namespace Jaminet
                     //Console.WriteLine("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
                     log.ErrorFormat("Update item CODE:'{0}' exception: {1}", updateFeedItemCode, ex.Message);
                 }
+                updateItemsCount++;
             }
             #endregion
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done!");
+            Console.WriteLine("Updated items:{0}", updateItemsCount);
             Console.WriteLine();
             Console.ResetColor();
+
+            log.InfoFormat("Full feed items updated by updated feed - count:{0}.", updateItemsCount);
+
             updateFeed = null;
         }
 

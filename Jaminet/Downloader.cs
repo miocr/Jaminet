@@ -33,7 +33,7 @@ namespace Jaminet
 
             httpClient = new HttpClient(httpClientHandler)
             {
-                Timeout = TimeSpan.FromSeconds(10)
+                Timeout = TimeSpan.FromSeconds(60)
             };
         }
 
@@ -63,7 +63,7 @@ namespace Jaminet
 
         private async Task<long> DownloadAsync(string url, string fileName)
         {
-            byte[] buffer = new byte[8192];
+            byte[] buffer = new byte[5120];//new byte[8192];
 
             bool endOfStream = false;
             long totalRead = 0;

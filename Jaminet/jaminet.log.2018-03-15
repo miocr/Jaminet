@@ -1,0 +1,129 @@
+﻿[15.03.18 00:00:39] 'Jaminet.Program': Starting application with args: '-STSB--ALL'
+[15.03.18 00:00:39] 'Jaminet.Supplier': Supplier created
+[15.03.18 00:00:41] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 00:00:41] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 00:00:42] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 00:00:42] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 00:00:43] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 00:01:21] 'Jaminet.Program': Starting application with args: '-STSB--ALL'
+[15.03.18 00:01:21] 'Jaminet.Supplier': Supplier created
+[15.03.18 00:01:22] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 00:01:23] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 00:01:23] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 00:01:24] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 00:01:24] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 00:01:37] 'Jaminet.Program': Starting application with args: '-STSB--ALL'
+[15.03.18 00:01:50] 'Jaminet.Supplier': Supplier created
+[15.03.18 00:01:53] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 00:01:53] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 00:01:54] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 00:01:54] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 00:01:55] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 00:03:33] 'Jaminet.Program': Starting application with args: '-STSB-ALL'
+[15.03.18 00:03:33] 'Jaminet.Supplier': Supplier created
+[15.03.18 00:03:34] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 00:03:35] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 00:03:35] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 00:03:36] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 00:03:36] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 00:04:17] 'Jaminet.Downloader': Downloading from url 'https://cdn1.tsbohemia.cz/export/ab3cbae0337bead9c7fdfbc97657653b/products.xml' to './data/TSB-feed-original.xml'
+[15.03.18 00:06:17] 'Jaminet.Downloader': Downloaded 101282730 bytes from url 'https://cdn1.tsbohemia.cz/export/ab3cbae0337bead9c7fdfbc97657653b/products.xml' to './data/TSB-feed-original.xml'
+[15.03.18 00:06:29] 'Jaminet.Downloader': Downloading from url 'https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml' to './data/TSB-feed-original-update.xml'
+[15.03.18 00:06:45] 'Jaminet.Downloader': Downloaded 12218543 bytes from url 'https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml' to './data/TSB-feed-original-update.xml'
+[15.03.18 00:08:15] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml
+[15.03.18 00:15:39] 'Jaminet.Program': Starting application with args: '-STSB-UPF'
+[15.03.18 00:15:39] 'Jaminet.Supplier': Supplier created
+[15.03.18 00:15:40] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 00:15:41] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 00:15:41] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 00:15:42] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 00:15:42] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 00:15:43] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml
+[15.03.18 19:58:38] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 19:58:38] 'Jaminet.Supplier': Supplier created
+[15.03.18 19:58:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 19:58:54] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 19:58:58] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 19:59:03] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 19:59:08] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 19:59:54] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 19:59:54] 'Jaminet.Supplier': Supplier created
+[15.03.18 19:59:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 19:59:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 19:59:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 19:59:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 19:59:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 19:59:57] 'Jaminet.Supplier': XML config deserialize exception: There is an error in XML document (0, 0).
+[15.03.18 20:00:07] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:00:07] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:00:09] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:00:09] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:00:09] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:00:09] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:00:09] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:00:10] 'Jaminet.Supplier': XML config deserialize exception: There is an error in XML document (0, 0).
+[15.03.18 20:00:57] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:00:57] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:01:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:01:10] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:01:16] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:01:20] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:01:25] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:02:34] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:02:41] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:02:43] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:02:43] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:02:44] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:02:45] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:02:45] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:02:58] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml
+[15.03.18 20:17:45] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:17:45] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:17:48] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:17:49] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:17:56] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:18:02] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:18:02] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:18:40] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:18:41] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:18:42] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:18:43] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:18:43] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:18:44] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:18:44] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:18:51] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml
+[15.03.18 20:36:22] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:36:22] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:36:24] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:36:25] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:36:25] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:36:26] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:36:27] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:36:30] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml
+[15.03.18 20:37:03] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:37:03] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:37:04] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:37:05] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:37:05] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:37:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:37:06] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:37:36] 'Jaminet.Program': Starting application with args: '-STSB-PF'
+[15.03.18 20:37:36] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:37:38] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:37:38] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:37:38] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:37:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:37:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:37:44] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml
+[15.03.18 20:44:37] 'Jaminet.Program': Starting application with args: '-STSB-ALL'
+[15.03.18 20:44:37] 'Jaminet.Supplier': Supplier created
+[15.03.18 20:44:38] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ND7wZjB4eJBvZtpnq7QD-rIqfuIYJrU3R5KGZKhjZVo' to './data/TSB-categories-BL.txt' from GoogleDrive
+[15.03.18 20:44:38] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ozQPdSY_iyeyxk8UfLLpThKjedZxvDO8P0xVzV8_4H0' to './data/TSB-categories-WL.txt' from GoogleDrive
+[15.03.18 20:44:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1jvVIdcEycU_kza1PEdwbL-2ZFNXTIAiaQUebMhRNj8Y' to './data/TSB-products-BL.txt' from GoogleDrive
+[15.03.18 20:44:39] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1--_pCyn0Xjxp68FpYr-3NtRSRJbTWX7VyTWOi1W5r5I' to './data/TSB-products-WL.txt' from GoogleDrive
+[15.03.18 20:44:40] 'Jaminet.GoogleDriveAPI': Downloaded fileId '1ULQKJfrrsRHvErZjLjUlqdtotEuwjG6Jtt0A-HO_Tbc' to './data/TSB-import-config.xml' from GoogleDrive
+[15.03.18 20:44:47] 'Jaminet.Downloader': Downloading from url 'https://cdn1.tsbohemia.cz/export/ab3cbae0337bead9c7fdfbc97657653b/products.xml' to './data/TSB-feed-original.xml'
+[15.03.18 20:47:21] 'Jaminet.Downloader': Downloaded 101549781 bytes from url 'https://cdn1.tsbohemia.cz/export/ab3cbae0337bead9c7fdfbc97657653b/products.xml' to './data/TSB-feed-original.xml'
+[15.03.18 20:47:23] 'Jaminet.Downloader': Downloading from url 'https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml' to './data/TSB-feed-original-update.xml'
+[15.03.18 20:47:34] 'Jaminet.Downloader': Downloaded 12248510 bytes from url 'https://cdn1.tsbohemia.cz/export/bbfa6e1221297b3f439a4a08eb13be11/products.xml' to './data/TSB-feed-original-update.xml'
+[15.03.18 20:47:34] 'Jaminet.Supplier': Loading feed from file:./data/TSB-feed-original.xml

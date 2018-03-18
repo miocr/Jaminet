@@ -107,7 +107,7 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                     case "-PF":
                         if (supplier != null)
                         {
-                            supplier.ProcessFeed(false);
+                            supplier.ProcessFeed(true);
                             supplier.SaveFeed(Supplier.FeedType.Processed);
                         }
                         break;
