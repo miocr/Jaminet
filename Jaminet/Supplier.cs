@@ -517,6 +517,8 @@ namespace Jaminet
             log.InfoFormat("Merged {0} external parameters for {1} products.", 
                 mergedParamsCount, extendedProductsCounter);
 
+            grabbedExtParameters = null;
+
         }
 
         public virtual XElement GetHeurekaProductsParameters(bool onlyNew = false)
