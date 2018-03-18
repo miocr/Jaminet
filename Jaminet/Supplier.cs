@@ -263,12 +263,18 @@ namespace Jaminet
         /// Pred zpracovanim se provede aktualizace feedu na zaklade 
         /// stazeni aktualizacniho feedu a jeho zpracovani do hlavniho.
         /// </param>
-        public virtual void ProcessFeed(bool update)
+        public virtual void ProcessFeed(bool update, bool mergeExtParams)
         {
             if (update)
                 LoadAndUpdate();
             else
                 LoadFeed();
+
+            if (mergeExtParams)
+            {
+                XElement extParams = LoadHeurekaProductsParameters();
+                MergeFeedWithExtParameters(extParams);
+            }
 
             if (CategoryBlackList == null || CategoryWhiteList == null ||
                 ProductWhiteList == null || ProductBlackList == null)
@@ -437,7 +443,7 @@ namespace Jaminet
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("done!");
-            Console.WriteLine("Updated items:{0}", updateItemsCount);
+            Console.WriteLine("Updated {0} items.", updateItemsCount);
             Console.WriteLine();
             Console.ResetColor();
 
@@ -455,42 +461,31 @@ namespace Jaminet
             if (Feed == null || extParamaters == null)
                 return;
 
+            Dictionary<string, XElement> grabbedExtParameters = new Dictionary<string, XElement>();
 
-            List<string> grabbedExtParametersProductCodes = new List<string>();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Merging external parameters... ");
+
             foreach (XElement extItemParameters in extParamaters.Descendants("SHOPITEM"))
             {
-                grabbedExtParametersProductCodes.Add(extItemParameters.Attribute("CODE").Value);
+                grabbedExtParameters.Add(extItemParameters.Attribute("CODE").Value, extItemParameters);
             }
 
             string supplierProductCode;
-
-            int itemCounter = 0;
-            bool itemEnabled;
+            int extendedProductsCounter = 0;
+            int mergedParamsCount = 0;
             foreach (XElement origItem in Feed.Descendants("SHOPITEM"))
             {
                 supplierProductCode = origItem.Element("CODE").Value;
-
-                itemEnabled = ChechProductByWBList(origItem);
-                if (!itemEnabled)
+                if (!grabbedExtParameters.ContainsKey(supplierProductCode))
                     continue;
+                
+                //Console.Write("{0} > Mergin parameters for item code: {1}",
+                //    (itemCounter++).ToString("000000"), supplierProductCode.PadRight(10));
 
-                if (!grabbedExtParametersProductCodes.Contains(supplierProductCode))
-                    continue;
-
-                //if (supplierProductCode == "#END#")
-                //    break;
-
-                Console.Write("{0} > Mergin parameters for item code: {1}",
-                    (itemCounter++).ToString("000000"), supplierProductCode.PadRight(10));
-
-                int origParamsCount = 0;
                 try
                 {
-
-                    XElement extParametersItem =
-                        extParamaters.Descendants("SHOPITEM")
-                        .Where(i => i.Attribute("CODE").Value == supplierProductCode).Single();
-
+                    XElement extParametersItem = grabbedExtParameters[supplierProductCode];
                     XElement origParams = origItem.Element("INFORMATION_PARAMETERS");
 
                     if (origParams == null)
@@ -499,22 +494,29 @@ namespace Jaminet
                         origItem.Add(origParams);
                     }
 
-                    origParamsCount = origParams.Descendants("INFORMATION_PARAMETER").Count();
-                    int mergedParamsCount = 0;
                     foreach (XElement extParameter in extParametersItem.Descendants("INFORMATION_PARAMETER"))
                     {
                         origParams.Add(extParameter);
                         mergedParamsCount++;
                     }
 
-                    Console.WriteLine("... merged {0}, total {1} parameters", mergedParamsCount, origParamsCount);
-
                 }
                 catch (InvalidOperationException)
                 {
                     Console.WriteLine();
                 }
+                extendedProductsCounter++;
             }
+
+            Console.WriteLine("done!");
+            Console.WriteLine("Merged {0} external parameters for {1} products.", 
+                mergedParamsCount, extendedProductsCounter);
+            Console.WriteLine();
+            Console.ResetColor();
+
+            log.InfoFormat("Merged {0} external parameters for {1} products.", 
+                mergedParamsCount, extendedProductsCounter);
+
         }
 
         public virtual XElement GetHeurekaProductsParameters(bool onlyNew = false)

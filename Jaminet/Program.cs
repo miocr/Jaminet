@@ -43,6 +43,7 @@ Akce (lze zadat vice, provedeny jsou v poradi zadani):
 - DFF   : download a ulozeni hlavniho plneho feedu dodavatele
 - DFU   : download a ulozeni aktualizacniho feedu dodavatele (sklad, ceny...)
 - UPF   : aktualizace feedu a zpracovani pravidel, white/black listu
+- UMF   : aktualizace feedu, merge externich parametru a zpracovani pravidel, white/black listu
 - PBF   : publikace zpracovaneho feedu do www 
 - MEP   : pridani parametru produktu ziskanych z ext.zdroje
 - GHPF  : ziskani parametru k vsem produktum ve feedu z Heureka.cz 
@@ -100,14 +101,14 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                     case "-UPF":
                         if (supplier != null)
                         {
-                            supplier.ProcessFeed(true);
+                            supplier.ProcessFeed(true, false);
                             supplier.SaveFeed(Supplier.FeedType.Processed);
                         }
                         break;
-                    case "-PF":
+                    case "-UMF":
                         if (supplier != null)
                         {
-                            supplier.ProcessFeed(true);
+                            supplier.ProcessFeed(true, true);
                             supplier.SaveFeed(Supplier.FeedType.Processed);
                         }
                         break;
@@ -119,7 +120,7 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                         {
                             extParams = supplier.LoadHeurekaProductsParameters();
                             supplier.MergeFeedWithExtParameters(extParams);
-                            supplier.SaveFeed(Supplier.FeedType.Processed);
+                            supplier.SaveFeed(Supplier.FeedType.FullOriginal);
                         }
                         break;
                     case "-GHPF":
@@ -143,7 +144,7 @@ pokusi ziskat parametry z Heureka.cz. Pozor, tato akce trva cca 5 hod.
                         {
                             supplier.GetAndSaveFeed(Supplier.FeedType.FullOriginal);
                             supplier.GetAndSaveFeed(Supplier.FeedType.UpdateOriginal);
-                            supplier.ProcessFeed(true);
+                            supplier.ProcessFeed(true, true);
                             supplier.SaveFeed(Supplier.FeedType.Processed);
                             supplier.PublishFeed();
                         }
